@@ -21,6 +21,66 @@ XMing.GameStateManager = new function() {
 
     var nodeArray = [
         {
+            acornNodes: [12],
+            directionNodes: [
+                { index: 1, direction: 0, isFixed: false},
+                { index: 2, direction: 0, isFixed: false},
+                { index: 3, direction: 0, isFixed: false},
+                { index: 4, direction: 0, isFixed: false},
+                { index: 5, direction: 0, isFixed: false},
+                { index: 6, direction: 0, isFixed: false},
+                { index: 7, direction: 0, isFixed: false},
+                { index: 8, direction: 0, isFixed: false},
+                { index: 9, direction: 0, isFixed: false},
+                { index: 10, direction: 0, isFixed: false},
+                { index: 11, direction: 0, isFixed: false},
+                { index: 12, direction: 0, isFixed: false},
+                { index: 13, direction: 0, isFixed: false},
+                { index: 14, direction: 0, isFixed: false},
+                { index: 15, direction: 0, isFixed: false},
+                { index: 16, direction: 0, isFixed: false},
+                { index: 17, direction: 0, isFixed: false},
+                { index: 18, direction: 0, isFixed: false},
+                { index: 19, direction: 0, isFixed: false},
+                { index: 20, direction: 0, isFixed: false},
+                { index: 21, direction: 0, isFixed: false},
+                { index: 22, direction: 0, isFixed: false},
+                { index: 23, direction: 0, isFixed: false},
+                { index: 24, direction: 0, isFixed: false}
+            ],
+            disabledNodes: []
+        },
+        {
+            acornNodes: [2, 12, 14],
+            directionNodes: [
+                { index: 1, direction: 1, isFixed: true},
+                { index: 2, direction: 0, isFixed: false},
+                { index: 3, direction: 1, isFixed: true},
+                { index: 4, direction: 0, isFixed: false},
+                { index: 5, direction: 2, isFixed: true},
+                { index: 6, direction: 0, isFixed: false},
+                { index: 7, direction: 2, isFixed: true},
+                { index: 8, direction: 0, isFixed: false},
+                { index: 9, direction: 2, isFixed: true},
+                { index: 10, direction: 0, isFixed: false},
+                { index: 11, direction: 1, isFixed: true},
+                { index: 12, direction: 0, isFixed: false},
+                { index: 13, direction: 1, isFixed: true},
+                { index: 14, direction: 0, isFixed: false},
+                { index: 15, direction: 2, isFixed: true},
+                { index: 16, direction: 0, isFixed: false},
+                { index: 17, direction: 2, isFixed: true},
+                { index: 18, direction: 0, isFixed: false},
+                { index: 19, direction: 2, isFixed: true},
+                { index: 20, direction: 0, isFixed: false},
+                { index: 21, direction: 1, isFixed: true},
+                { index: 22, direction: 0, isFixed: false},
+                { index: 23, direction: 1, isFixed: true},
+                { index: 24, direction: 0, isFixed: false}
+            ],
+            disabledNodes: []
+        },
+        {
             acornNodes: [2, 4, 10, 12, 14, 20, 22],
             directionNodes: [{ index: 12, direction: 0, isFixed: true}],
             disabledNodes: [6, 8, 16, 18]
