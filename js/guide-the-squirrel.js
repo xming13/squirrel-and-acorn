@@ -21,20 +21,87 @@ XMing.GameStateManager = new function() {
 
     var nodeArray = [
         {
-            acornNodes: [2, 20],
-            fixedNodes: [{ index: 3, direction: 2}],
-            disabledNodes: [5, 14]
+            acornNodes: [2, 4, 10, 12, 14, 20, 22],
+            directionNodes: [{ index: 12, direction: 0, isFixed: true}],
+            disabledNodes: [6, 8, 16, 18]
         },
         {
-            acornNodes: [2, 4, 10, 12, 14, 20, 22, 24],
-            fixedNodes: [],
-            disabledNodes: [6, 8, 16, 18]
+            acornNodes: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
+            directionNodes: [
+                { index: 11, direction: 2, isFixed: true},
+                { index: 13, direction: 0, isFixed: true}
+            ],
+            disabledNodes: []
+        },
+        {
+            acornNodes: [2, 4, 6, 8, 10, 14, 16, 18, 20, 22],
+            directionNodes: [
+                { index: 1, direction: 1, isFixed: true},
+                { index: 5, direction: 2, isFixed: true},
+                { index: 6, direction: 2, isFixed: false},
+                { index: 7, direction: 3, isFixed: true},
+                { index: 11, direction: 3, isFixed: false },
+                { index: 17, direction: 1, isFixed: true},
+                { index: 19, direction: 2, isFixed: true},
+                { index: 23, direction: 1, isFixed: true}
+            ],
+            disabledNodes: [12]
         }
     ];
 
     this.init = function() {
         window.addEventListener("resize", this.onResize.bind(this), false);
         this.initGame();
+    };
+
+    this.checkEndGamePath = function() {
+        var numAcornCollected = 0;
+        var currentPath = [];
+        var nodeIndex = 0;
+
+        while (nodeIndex > -1) {
+            var currentNode = nodes[nodeIndex];
+            if (!_.contains(currentPath, currentNode) && !currentNode.hasClass("node-gameover")) {
+                currentPath.push(currentNode);
+                if (currentNode.hasClass("acorn")) {
+                    numAcornCollected++;
+                }
+                if (nodeIndex == 24) {
+                    // reach the last node, so break the while loop
+                    nodeIndex = -1;
+                }
+                else {
+                    var currentDirection = currentNode.data("direction");
+                    switch (currentDirection) {
+                        case 0:
+                            nodeIndex = (nodeIndex <= 4) ? -1 : nodeIndex - 5;
+                            break;
+                        case 1:
+                            nodeIndex = (nodeIndex % 5 == 4) ? -1 : nodeIndex + 1;
+                            break;
+                        case 2:
+                            nodeIndex = (nodeIndex >= 20) ? -1 : nodeIndex + 5;
+                            break;
+                        case 3:
+                            nodeIndex = (nodeIndex % 5 == 0) ? -1 : nodeIndex - 1;
+                            break;
+                    }
+                }
+            }
+            else {
+                nodeIndex = -1;
+            }
+        }
+
+        _.each(currentPath, function(node) {
+            node.addClass("selected");
+        });
+        _.each(_.difference(nodes, currentPath), function(node) {
+            node.removeClass("selected");
+        });
+
+        var numAcornTotal = 17;
+        return _.indexOf(nodes, _.last(currentPath)) == 24 && numAcornCollected == numAcornTotal;
     };
 
     this.checkPath = function() {
@@ -78,12 +145,10 @@ XMing.GameStateManager = new function() {
         }
 
         _.each(currentPath, function(node) {
-            console.log(_.indexOf(nodes, node));
             node.addClass("selected");
         });
         _.each(_.difference(nodes, currentPath), function(node) {
             node.removeClass("selected");
-            console.log("remove: " + node);
         });
 
         var numAcornTotal = nodeArray[roundNumber].acornNodes.length;
@@ -105,13 +170,17 @@ XMing.GameStateManager = new function() {
                 li.addClass("disabled");
             }
             else {
-                var img = $("<img>", { src: "images/arrow.png", class: "arrow" });
+                var img = $("<img>", { src: i == 24 ? "images/acorn_big.png"  : "images/arrow.png", class: "arrow" });
 
-                var filtered = _.filter(node.fixedNodes, _.matches({ index: i}));
-                if (filtered.length > 0) {
-                    img.transition({ rotate: (filtered[0].direction * 90) + 'deg' });
-                    li.data("direction", filtered[0].direction);
-                    li.addClass("fixed");
+                var directionNodes = _.filter(node.directionNodes, _.matches({ index: i}));
+                if (directionNodes.length > 0) {
+                    var directionNode = directionNodes[0];
+                    img.transition({ rotate: (directionNode.direction * 90) + 'deg' });
+                    li.data("direction", directionNode.direction);
+
+                    if (directionNode.isFixed) {
+                        li.addClass("fixed");
+                    }
                 }
                 else {
                     var direction = i == 0 ? 0 : _.random(3);
@@ -173,12 +242,14 @@ XMing.GameStateManager = new function() {
             $(this).data("direction", ($(this).data("direction") + 1) % 4);
             $(this).find("img.arrow").transition({ rotate: '+=90deg' });
             if (self.checkPath()) {
-                swal({
-                    title: "Well done!",
-                    confirmButtonText: "Next"
-                }, function() {
-                    self.loadNextRound();
-                })
+                _.delay(function() {
+                    swal({
+                        title: "Well done!",
+                        confirmButtonText: "Next"
+                    }, function() {
+                        self.loadNextRound();
+                    })
+                }, 300);
             }
         });
     };
@@ -186,22 +257,12 @@ XMing.GameStateManager = new function() {
     this.loadNextRound = function() {
         var self = this;
 
-        var gameGrid = $("ul.game-grid");
-        $("#result")
-            .width(gameGrid.width())
-            .height(gameGrid.height())
-            .show();
-
-        _.delay(function() {
-            $("#result").hide();
-
-            if (++roundNumber == nodeArray.length) {
-                self.endGame();
-            }
-            else {
-                self.loadData();
-            }
-        }, 1000);
+        if (++roundNumber == nodeArray.length) {
+            self.endGame();
+        }
+        else {
+            self.loadData();
+        }
     };
 
     this.onResize = function(event) {
@@ -263,15 +324,53 @@ XMing.GameStateManager = new function() {
 
         $(".game-grid").html("");
 
-        var gameover = ["G", "A", "M", "E", "O", "V", "E", "R"];
+        var gameover = [
+            "", "", "", "", "",
+            "G", "A", "M", "E", "",
+            "", "", "", "", "",
+            "", "O", "V", "E", "R",
+            "", "", "", "", ""
+        ];
 
-        _.each(gameover, function(letter) {
-            $(".game-grid").append("<li><div class='content animated fadeIn'>" + letter + "</li>");
+        nodes = [];
+        _.each(gameover, function(letter, index) {
+            var li = $("<li>");
+
+            if (letter == "") {
+                var img = $("<img>", { src: index == 24 ? "images/acorn_big.png"  : "images/arrow.png", class: "arrow" });
+                var direction = index == 0 ? 0 : _.random(3);
+                img.transition({ rotate: (direction * 90) + 'deg' });
+                li.append(img);
+                li.data("direction", direction);
+
+                var imgAcorn = $("<img>", { src: "images/acorn.png" });
+                li.append(imgAcorn);
+                li.addClass("acorn");
+            }
+            else {
+                var div = $("<div>", { class: "content animated fadeIn", html: letter });
+                li.append(div);
+                li.addClass("node-gameover");
+            }
+
+            nodes.push(li);
+            $(".game-grid").append(li);
         });
 
         $("#timer").hide();
         $("#replay").show();
         $("#score-value").html(score);
+
+        $("ul.game-grid li:not(.fixed):not(.disabled)").click(function() {
+            $(this).data("direction", ($(this).data("direction") + 1) % 4);
+            $(this).find("img.arrow").transition({ rotate: '+=90deg' });
+            if (self.checkEndGamePath()) {
+                swal({
+                    title: "Thanks for playing!!!",
+                    imageUrl: "images/love.png"
+                })
+            }
+        });
     };
 
     // check game state
