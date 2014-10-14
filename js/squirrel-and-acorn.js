@@ -748,7 +748,8 @@ XMing.GameStateManager = new function() {
             if (self.checkPath(false)) {
                 _.delay(function() {
                     swal({
-                        title: "Well done!",
+                        title: "Good Job!",
+                        type: "success",
                         confirmButtonText: "Next"
                     }, function() {
                         self.loadNextRound();
