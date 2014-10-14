@@ -3,9 +3,6 @@ var XMing = XMing || {};
 XMing.GameStateManager = new function() {
 
     var gameState;
-    var gameTimer;
-    var remainingTime;
-    var score = 0;
     var roundNumber = 0;
 
     var nodes = [];
@@ -19,95 +16,287 @@ XMing.GameStateManager = new function() {
         END: "end"
     };
 
-    var nodeArray = [
-        {
-            acornNodes: [12],
-            directionNodes: [
-                { index: 1, direction: 0, isFixed: false},
-                { index: 2, direction: 0, isFixed: false},
-                { index: 3, direction: 0, isFixed: false},
-                { index: 4, direction: 0, isFixed: false},
-                { index: 5, direction: 0, isFixed: false},
-                { index: 6, direction: 0, isFixed: false},
-                { index: 7, direction: 0, isFixed: false},
-                { index: 8, direction: 0, isFixed: false},
-                { index: 9, direction: 0, isFixed: false},
-                { index: 10, direction: 0, isFixed: false},
-                { index: 11, direction: 0, isFixed: false},
-                { index: 12, direction: 0, isFixed: false},
-                { index: 13, direction: 0, isFixed: false},
-                { index: 14, direction: 0, isFixed: false},
-                { index: 15, direction: 0, isFixed: false},
-                { index: 16, direction: 0, isFixed: false},
-                { index: 17, direction: 0, isFixed: false},
-                { index: 18, direction: 0, isFixed: false},
-                { index: 19, direction: 0, isFixed: false},
-                { index: 20, direction: 0, isFixed: false},
-                { index: 21, direction: 0, isFixed: false},
-                { index: 22, direction: 0, isFixed: false},
-                { index: 23, direction: 0, isFixed: false},
-                { index: 24, direction: 0, isFixed: false}
-            ],
-            disabledNodes: []
-        },
-        {
-            acornNodes: [2, 12, 14],
-            directionNodes: [
-                { index: 1, direction: 1, isFixed: true},
-                { index: 2, direction: 0, isFixed: false},
-                { index: 3, direction: 1, isFixed: true},
-                { index: 4, direction: 0, isFixed: false},
-                { index: 5, direction: 2, isFixed: true},
-                { index: 6, direction: 0, isFixed: false},
-                { index: 7, direction: 2, isFixed: true},
-                { index: 8, direction: 0, isFixed: false},
-                { index: 9, direction: 2, isFixed: true},
-                { index: 10, direction: 0, isFixed: false},
-                { index: 11, direction: 1, isFixed: true},
-                { index: 12, direction: 0, isFixed: false},
-                { index: 13, direction: 1, isFixed: true},
-                { index: 14, direction: 0, isFixed: false},
-                { index: 15, direction: 2, isFixed: true},
-                { index: 16, direction: 0, isFixed: false},
-                { index: 17, direction: 2, isFixed: true},
-                { index: 18, direction: 0, isFixed: false},
-                { index: 19, direction: 2, isFixed: true},
-                { index: 20, direction: 0, isFixed: false},
-                { index: 21, direction: 1, isFixed: true},
-                { index: 22, direction: 0, isFixed: false},
-                { index: 23, direction: 1, isFixed: true},
-                { index: 24, direction: 0, isFixed: false}
-            ],
-            disabledNodes: []
-        },
-        {
-            acornNodes: [2, 4, 10, 12, 14, 20, 22],
-            directionNodes: [{ index: 12, direction: 0, isFixed: true}],
-            disabledNodes: [6, 8, 16, 18]
-        },
-        {
-            acornNodes: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
-            directionNodes: [
-                { index: 11, direction: 2, isFixed: true},
-                { index: 13, direction: 0, isFixed: true}
-            ],
-            disabledNodes: []
-        },
-        {
-            acornNodes: [2, 4, 6, 8, 10, 14, 16, 18, 20, 22],
-            directionNodes: [
-                { index: 1, direction: 1, isFixed: true},
-                { index: 5, direction: 2, isFixed: true},
-                { index: 6, direction: 2, isFixed: false},
-                { index: 7, direction: 3, isFixed: true},
-                { index: 11, direction: 3, isFixed: false },
-                { index: 17, direction: 1, isFixed: true},
-                { index: 19, direction: 2, isFixed: true},
-                { index: 23, direction: 1, isFixed: true}
-            ],
-            disabledNodes: [12]
-        }
-    ];
+    var nodeArray = [{
+        acornNodes: [12],
+        directionNodes: [{
+            index: 1,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 2,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 3,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 4,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 5,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 6,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 7,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 8,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 9,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 10,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 11,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 12,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 13,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 14,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 15,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 16,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 17,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 18,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 19,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 20,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 21,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 22,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 23,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 24,
+            direction: 0,
+            isFixed: false
+        }],
+        disabledNodes: []
+    }, {
+        acornNodes: [2, 12, 14],
+        directionNodes: [{
+            index: 1,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 2,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 3,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 4,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 5,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 6,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 7,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 8,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 9,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 10,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 11,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 12,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 13,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 14,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 15,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 16,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 17,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 18,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 19,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 20,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 21,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 22,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 23,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 24,
+            direction: 0,
+            isFixed: false
+        }],
+        disabledNodes: []
+    }, {
+        acornNodes: [2, 4, 10, 12, 14, 20, 22],
+        directionNodes: [{
+            index: 12,
+            direction: 0,
+            isFixed: true
+        }, {
+            index: 19,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 23,
+            direction: 3,
+            isFixed: false
+        }],
+        disabledNodes: [6, 8, 16, 18]
+    }, {
+        acornNodes: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
+        directionNodes: [{
+            index: 11,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 13,
+            direction: 0,
+            isFixed: true
+        }, {
+            index: 19,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 23,
+            direction: 3,
+            isFixed: false
+        }],
+        disabledNodes: []
+    }, {
+        acornNodes: [2, 4, 6, 8, 10, 14, 16, 18, 20, 22],
+        directionNodes: [{
+            index: 1,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 5,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 6,
+            direction: 2,
+            isFixed: false
+        }, {
+            index: 7,
+            direction: 3,
+            isFixed: true
+        }, {
+            index: 11,
+            direction: 3,
+            isFixed: false
+        }, {
+            index: 14,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 17,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 18,
+            direction: 3,
+            isFixed: false
+        }, {
+            index: 19,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 23,
+            direction: 1,
+            isFixed: true
+        }],
+        disabledNodes: [12]
+    }];
 
     this.init = function() {
         window.addEventListener("resize", this.onResize.bind(this), false);
@@ -123,14 +312,13 @@ XMing.GameStateManager = new function() {
             var currentNode = nodes[nodeIndex];
             if (!_.contains(currentPath, currentNode) && !currentNode.hasClass("node-gameover")) {
                 currentPath.push(currentNode);
-                if (currentNode.hasClass("acorn")) {
+                if (currentNode.hasClass("node-acorn")) {
                     numAcornCollected++;
                 }
                 if (nodeIndex == 24) {
                     // reach the last node, so break the while loop
                     nodeIndex = -1;
-                }
-                else {
+                } else {
                     var currentDirection = currentNode.data("direction");
                     switch (currentDirection) {
                         case 0:
@@ -147,8 +335,7 @@ XMing.GameStateManager = new function() {
                             break;
                     }
                 }
-            }
-            else {
+            } else {
                 nodeIndex = -1;
             }
         }
@@ -160,7 +347,7 @@ XMing.GameStateManager = new function() {
             node.removeClass("selected");
         });
 
-        var numAcornTotal = 17;
+        var numAcornTotal = 16;
         return _.indexOf(nodes, _.last(currentPath)) == 24 && numAcornCollected == numAcornTotal;
     };
 
@@ -171,17 +358,16 @@ XMing.GameStateManager = new function() {
 
         while (nodeIndex > -1) {
             var currentNode = nodes[nodeIndex];
-            if (!_.contains(currentPath, currentNode) && !currentNode.hasClass("disabled")) {
+            if (!_.contains(currentPath, currentNode) && !currentNode.hasClass("node-disabled")) {
                 currentPath.push(currentNode);
 
-                if (currentNode.hasClass("acorn")) {
+                if (currentNode.hasClass("node-acorn")) {
                     numAcornCollected++;
                 }
                 if (nodeIndex == 24) {
                     // reach the last node, so break the while loop
                     nodeIndex = -1;
-                }
-                else {
+                } else {
                     var currentDirection = currentNode.data("direction");
                     switch (currentDirection) {
                         case 0:
@@ -198,8 +384,7 @@ XMing.GameStateManager = new function() {
                             break;
                     }
                 }
-            }
-            else {
+            } else {
                 nodeIndex = -1;
             }
         }
@@ -227,33 +412,60 @@ XMing.GameStateManager = new function() {
             var li = $("<li>");
 
             if (_.contains(node.disabledNodes, i)) {
-                li.addClass("disabled");
-            }
-            else {
-                var img = $("<img>", { src: i == 24 ? "images/acorn_big.png"  : "images/arrow.png", class: "arrow" });
+                li.addClass("node-disabled");
+            } else {
+                var img;
 
-                var directionNodes = _.filter(node.directionNodes, _.matches({ index: i}));
-                if (directionNodes.length > 0) {
-                    var directionNode = directionNodes[0];
-                    img.transition({ rotate: (directionNode.direction * 90) + 'deg' });
-                    li.data("direction", directionNode.direction);
+                if (i == 24) {
+                    img = $("<img>", {
+                        src: "images/acorn_big.png",
+                        class: "acorn"
+                    });
+                    li.append(img);
+                } else {
+                    img = $("<img>", {
+                        src: "images/arrow.png",
+                        class: "arrow"
+                    });
+                    var directionNodes = _.filter(node.directionNodes, _.matches({
+                        index: i
+                    }));
+                    if (directionNodes.length > 0) {
+                        var directionNode = directionNodes[0];
+                        img.transition({
+                            rotate: (directionNode.direction * 90) + 'deg'
+                        });
+                        li.data("direction", directionNode.direction);
 
-                    if (directionNode.isFixed) {
-                        li.addClass("fixed");
+                        if (directionNode.isFixed) {
+                            li.addClass("node-fixed");
+                        }
+                    } else {
+                        var direction = i == 0 ? 0 : _.random(3);
+                        img.transition({
+                            rotate: (direction * 90) + 'deg'
+                        });
+                        li.data("direction", direction);
+                    }
+                    li.append(img);
+
+                    if (i == 0) {
+                        var imgSquirrel = $("<img>", {
+                            src: "images/squirrel.png",
+                            class: "squirrel animated bounce"
+                        });
+                        li.append(imgSquirrel);
                     }
                 }
-                else {
-                    var direction = i == 0 ? 0 : _.random(3);
-                    img.transition({ rotate: (direction * 90) + 'deg' });
-                    li.data("direction", direction);
-                }
-                li.append(img);
             }
 
             if (_.contains(node.acornNodes, i)) {
-                li.addClass("acorn");
+                li.addClass("node-acorn");
 
-                var imgAcorn = $("<img>", { src: "images/acorn.png" });
+                var imgAcorn = $("<img>", {
+                    src: "images/acorn.png",
+                    class: "acorn"
+                });
                 li.append(imgAcorn);
             }
 
@@ -273,34 +485,11 @@ XMing.GameStateManager = new function() {
 
         this.loadGrid();
 
-        remainingTime = roundNumber + 3.5;
-        remainingTime = 999999;
-        $("#timer-value").html(Math.floor(remainingTime));
-
-        (function countdown() {
-            remainingTime -= 0.5;
-            $("#timer-value").html(Math.ceil(remainingTime));
-            $("#timer-value").addClass("animated fadeIn");
-            $("#score-value").html(score);
-
-            if (remainingTime <= 0) {
-                clearTimeout(gameTimer);
-
-                $("#result-content")
-                    .html("Time's up!")
-                    .addClass('animated bounceIn')
-                    .css("color", "rgba(17, 189, 255, 255)");
-                $("#timer-value").removeClass("animated fadeIn");
-
-                self.loadNextRound();
-            } else {
-                gameTimer = setTimeout(countdown, 500);
-            }
-        })();
-
-        $("ul.game-grid li:not(.fixed):not(.disabled)").click(function() {
+        $("ul.game-grid li:not(.node-fixed):not(.node-disabled)").click(function() {
             $(this).data("direction", ($(this).data("direction") + 1) % 4);
-            $(this).find("img.arrow").transition({ rotate: '+=90deg' });
+            $(this).find("img.arrow").transition({
+                rotate: '+=90deg'
+            });
             if (self.checkPath()) {
                 _.delay(function() {
                     swal({
@@ -319,8 +508,7 @@ XMing.GameStateManager = new function() {
 
         if (++roundNumber == nodeArray.length) {
             self.endGame();
-        }
-        else {
+        } else {
             self.loadData();
         }
     };
@@ -368,10 +556,8 @@ XMing.GameStateManager = new function() {
         gameState = GAME_STATE_ENUM.START;
         var self = this;
 
-        score = 0;
         roundNumber = 0;
 
-        $("#timer").show();
         $("#replay").hide();
         this.onResize();
         self.loadData();
@@ -397,18 +583,45 @@ XMing.GameStateManager = new function() {
             var li = $("<li>");
 
             if (letter == "") {
-                var img = $("<img>", { src: index == 24 ? "images/acorn_big.png"  : "images/arrow.png", class: "arrow" });
-                var direction = index == 0 ? 0 : _.random(3);
-                img.transition({ rotate: (direction * 90) + 'deg' });
-                li.append(img);
-                li.data("direction", direction);
 
-                var imgAcorn = $("<img>", { src: "images/acorn.png" });
-                li.append(imgAcorn);
-                li.addClass("acorn");
-            }
-            else {
-                var div = $("<div>", { class: "content animated fadeIn", html: letter });
+                if (index == 24) {
+                    var img = $("<img>", {
+                        src: "images/acorn_big.png",
+                        class: "acorn"
+                    });
+                    li.append(img);
+                } else {
+                    var img = $("<img>", {
+                        src: "images/arrow.png",
+                        class: "arrow"
+                    });
+                    var direction = index == 0 ? 0 : _.random(3);
+                    img.transition({
+                        rotate: (direction * 90) + 'deg'
+                    });
+                    li.append(img);
+                    li.data("direction", direction);
+
+                    var imgAcorn = $("<img>", {
+                        src: "images/acorn.png",
+                        class: "acorn"
+                    });
+                    li.append(imgAcorn);
+                    li.addClass("node-acorn");
+
+                    if (index == 0) {
+                        var imgSquirrel = $("<img>", {
+                            src: "images/squirrel.png",
+                            class: "squirrel animated bounce"
+                        });
+                        li.append(imgSquirrel);
+                    }
+                }
+            } else {
+                var div = $("<div>", {
+                    class: "content animated fadeIn",
+                    html: letter
+                });
                 li.append(div);
                 li.addClass("node-gameover");
             }
@@ -417,18 +630,20 @@ XMing.GameStateManager = new function() {
             $(".game-grid").append(li);
         });
 
-        $("#timer").hide();
         $("#replay").show();
-        $("#score-value").html(score);
 
-        $("ul.game-grid li:not(.fixed):not(.disabled)").click(function() {
+        var hasAlertThank = false;
+        $("ul.game-grid li:not(.node-fixed):not(.node-disabled)").click(function() {
             $(this).data("direction", ($(this).data("direction") + 1) % 4);
-            $(this).find("img.arrow").transition({ rotate: '+=90deg' });
-            if (self.checkEndGamePath()) {
+            $(this).find("img.arrow").transition({
+                rotate: '+=90deg'
+            });
+            if (self.checkEndGamePath() && !hasAlertThank) {
                 swal({
                     title: "Thanks for playing!!!",
                     imageUrl: "images/love.png"
-                })
+                });
+                hasAlertThank = true;
             }
         });
     };

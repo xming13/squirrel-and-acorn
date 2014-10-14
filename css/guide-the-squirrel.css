@@ -136,7 +136,7 @@ a {
 }
 
 .main-content {
-    background: #00f717;
+    background: #00A00F;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -176,8 +176,8 @@ a {
     font-weight: normal;
     text-align: center;
     color: #fff;
-    background-color: #009700;
-    border: 1px solid #016F01;
+    background-color: #00F100;
+    border: 1px solid #38FF38;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -186,14 +186,14 @@ a {
 
 .btn-play:hover {
     color: #fff;
-    background-color: #00C700;
-    border-color: #00BB00;
+    background-color: #88FF88;
+    border-color: #B8FFB8;
     outline: 0px none;
 }
 
 .panel-game {
     position: relative;
-    width: 60%;
+    width: 63%;
     margin: 0 auto;
 }
 
@@ -206,12 +206,12 @@ a {
     position: relative;
     width: 40px;
     height: 40px;
-    background: #c60000;
+    background: #047A04;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     color: transparent;
-    border: 4px solid #9b0000;
+    border: 4px solid #4EEE0F;
     cursor: pointer;
 }
 .icon-repeat:before {
@@ -246,52 +246,10 @@ a {
     background: #fff;
 }
 .icon-repeat:hover:before {
-    color: #c60000;
+    color: #047a04;
 }
 .icon-repeat:hover:after {
     opacity: 1;
-}
-
-#timer {
-    float: left;
-    padding: 5px;
-    border: 2px solid #9b0000;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    background: #C60000;
-    color: #fff;
-}
-
-#timer-value {
-    font-weight: bold;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-delay: 0s;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-duration: 1s;
-    -moz-animation-delay: 0s;
-    -moz-animation-iteration-count: infinite;
-    animation-duration: 1s;
-    animation-delay: 0s;
-    animation-iteration-count: infinite;
-}
-#score {
-    float: right;
-    padding: 5px;
-    border: 2px solid #9b0000;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    background: #C60000;
-    color: #fff;
-}
-
-.score-change {
-    position: absolute;
-    top: -10px;
-    font-size: 20px;
-    font-weight: bold;
-    right: 6px;
 }
 
 .gameboard {
@@ -302,7 +260,7 @@ a {
     padding: 0;
     list-style: none;
     position: relative;
-    background: #00ce00;
+    background: #00FF00;
     color: #fff;
 }
 
@@ -310,24 +268,23 @@ a {
     display: table;
     position: relative;
     float: left;
-    overflow: hidden;
     width: 20%;
     cursor: pointer;
     border: 1px solid #fff;
 }
 
-.game-grid li.fixed {
+.game-grid li.node-fixed {
     background-color: #084108 !important;
 }
-.game-grid li.disabled {
+.game-grid li.node-disabled {
     background-color: #888;
 }
-.game-grid li.acorn {
+.game-grid li.node-acorn {
 
 }
 .game-grid li:hover {
     background-color: #fff;
-    color: #c60000;
+    color: #00FF00;
 }
 
 .game-grid li.selected {
@@ -355,6 +312,20 @@ a {
     width: 100%;
     cursor: pointer;
     max-width: 100%;
+}
+
+img.squirrel {
+    -moz-animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -ms-animation-iteration-count:infinite;
+    animation-iteration-count:infinite;
+}
+
+img.acorn {
+    -moz-animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+    -ms-animation-iteration-count:infinite;
+    animation-iteration-count:infinite;
 }
 
 #result {
@@ -387,7 +358,7 @@ and (max-device-width : 540px) {
     }
 
     .panel-game {
-        width: 99%;
+        width: 100%;
     }
 
     .game-grid li:after {
