@@ -347,7 +347,7 @@ XMing.GameStateManager = new function() {
             node.removeClass("selected");
         });
 
-        var numAcornTotal = 16;
+        var numAcornTotal = 15;
         return _.indexOf(nodes, _.last(currentPath)) == 24 && numAcornCollected == numAcornTotal;
     };
 
@@ -602,19 +602,20 @@ XMing.GameStateManager = new function() {
                     li.append(img);
                     li.data("direction", direction);
 
-                    var imgAcorn = $("<img>", {
-                        src: "images/acorn.png",
-                        class: "acorn"
-                    });
-                    li.append(imgAcorn);
-                    li.addClass("node-acorn");
-
                     if (index == 0) {
                         var imgSquirrel = $("<img>", {
                             src: "images/squirrel.png",
                             class: "squirrel animated bounce"
                         });
                         li.append(imgSquirrel);
+                    }
+                    else {
+                        var imgAcorn = $("<img>", {
+                            src: "images/acorn.png",
+                            class: "acorn"
+                        });
+                        li.append(imgAcorn);
+                        li.addClass("node-acorn");
                     }
                 }
             } else {
