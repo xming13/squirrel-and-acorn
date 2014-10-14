@@ -270,7 +270,7 @@ a {
     display: table;
     position: relative;
     float: left;
-    width: calc(20%);
+    width: 20%;
     cursor: pointer;
     border: 1px solid #000;
 }
