@@ -253,12 +253,16 @@ a {
     opacity: 1;
 }
 
+.scoreboard {
+    margin-bottom: 15px;
+}
+
 .gameboard {
     position: relative;
 }
 
 .game-grid {
-    margin: 0 auto;
+    margin: auto;
     padding: 0;
     list-style: none;
     position: relative;

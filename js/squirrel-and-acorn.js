@@ -2,6 +2,7 @@ var XMing = XMing || {};
 XMing.GameStateManager = new
 
     function() {
+        var windowWidth;
         var gameState;
         var roundNumber = 0;
         var nodes = [];
@@ -479,12 +480,20 @@ XMing.GameStateManager = new
                 direction: 3,
                 isFixed: true
             }, {
+                index: 10,
+                direction: 2,
+                isFixed: false
+            }, {
                 index: 11,
                 direction: 3,
                 isFixed: false
             }, {
                 index: 14,
                 direction: 0,
+                isFixed: false
+            }, {
+                index: 15,
+                direction: 3,
                 isFixed: false
             }, {
                 index: 17,
@@ -567,52 +576,9 @@ XMing.GameStateManager = new
             direction: 1
         }];
         this.init = function() {
+            windowWidth = $(window).width();
             window.addEventListener("resize", this.onResize.bind(this), false);
             this.initGame();
-        };
-        this.checkEndGamePath = function() {
-            var numAcornCollected = 0;
-            var currentPath = [];
-            var nodeIndex = 0;
-            while (nodeIndex > -1) {
-                var currentNode = nodes[nodeIndex];
-                if (!_.contains(currentPath, currentNode) && !currentNode.hasClass("node-gameover")) {
-                    currentPath.push(currentNode);
-                    if (currentNode.hasClass("node-acorn")) {
-                        numAcornCollected++;
-                    }
-                    if (nodeIndex == 24) {
-                        // reach the last node, so break the while loop
-                        nodeIndex = -1;
-                    } else {
-                        var currentDirection = currentNode.data("direction");
-                        switch (currentDirection) {
-                            case 0:
-                                nodeIndex = (nodeIndex <= 4) ? -1 : nodeIndex - 5;
-                                break;
-                            case 1:
-                                nodeIndex = (nodeIndex % 5 == 4) ? -1 : nodeIndex + 1;
-                                break;
-                            case 2:
-                                nodeIndex = (nodeIndex >= 20) ? -1 : nodeIndex + 5;
-                                break;
-                            case 3:
-                                nodeIndex = (nodeIndex % 5 == 0) ? -1 : nodeIndex - 1;
-                                break;
-                        }
-                    }
-                } else {
-                    nodeIndex = -1;
-                }
-            }
-            _.each(currentPath, function(node) {
-                node.addClass("selected");
-            });
-            _.each(_.difference(nodes, currentPath), function(node) {
-                node.removeClass("selected");
-            });
-            var numAcornTotal = 15;
-            return _.indexOf(nodes, _.last(currentPath)) == 24 && numAcornCollected == numAcornTotal;
         };
         this.getDirectionClass = function(direction) {
             var directionClass = "";
@@ -783,7 +749,8 @@ XMing.GameStateManager = new
                             title: "Good Job!",
                             type: "success",
                             confirmButtonText: "Next",
-                            confirmButtonColor: "#59FF6D"
+                            confirmButtonColor: "#59FF6D",
+                            closeOnConfirm: roundNumber + 1 != nodeArray.length
                         }, function() {
                             self.loadNextRound();
                             $('html, body').animate({
@@ -803,22 +770,26 @@ XMing.GameStateManager = new
             }
         };
         this.onResize = function(event) {
-            var lis = $(".game-grid").children("li");
-            var liMaxWidth = _.max(lis, function(li) {
-                return $(li).width();
-            });
-            var maxWidth = $(liMaxWidth).width();
-            _.each(lis, function(li) {
-                $(li).height(maxWidth);
-            });
-            $("ul.game-grid").width(maxWidth * 5);
-            var styles = "<style>" + ".game-grid li { height: " + maxWidth + "px; } " + ".game-grid li .content { font-size: " + (maxWidth * 0.5) + "px; } " + "#result-content { font-size: " + (maxWidth * 0.8) + "px; } " + ".game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } " + "</style>";
-            if (injectedStyleDiv) {
-                injectedStyleDiv.html(styles);
-            } else {
-                injectedStyleDiv = $("<div />", {
-                    html: styles
-                }).appendTo("body");
+            if($(window).width() != windowWidth){
+                windowWidth = $(window).width();
+
+                var lis = $(".game-grid").children("li");
+                var liMaxWidth = _.max(lis, function(li) {
+                    return $(li).width();
+                });
+                var maxWidth = $(liMaxWidth).width();
+                _.each(lis, function(li) {
+                    $(li).height(maxWidth);
+                });
+                $("ul.game-grid").width(maxWidth * 5);
+                var styles = "<style>" + ".game-grid li { height: " + maxWidth + "px; } " + ".game-grid li .content { font-size: " + (maxWidth * 0.5) + "px; } " + "#result-content { font-size: " + (maxWidth * 0.8) + "px; } " + ".game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } " + "</style>";
+                if (injectedStyleDiv) {
+                    injectedStyleDiv.html(styles);
+                } else {
+                    injectedStyleDiv = $("<div />", {
+                        html: styles
+                    }).appendTo("body");
+                }
             }
         };
         this.preloadImage = function() {
@@ -976,7 +947,7 @@ XMing.GameStateManager = new
                 nodes.push(li);
                 $(".game-grid").append(li);
             }
-            this.checkEndGamePath(true);
+            this.checkPath(true);
 
             $("#replay").show();
             var hasAlertedThank = false;
@@ -987,9 +958,9 @@ XMing.GameStateManager = new
                 });
                 if (self.checkPath(true) && !hasAlertedThank) {
                     swal({
-                        title: "Thanks for playing!!!",
-                        text: "There are 8512 different paths for the squirrel to move from top left to bottom right!",
-                        imageUrl: "images/love.png"
+                        title: "8512",
+                        text: "The number of different paths for the squirrel to move from top left to bottom right!",
+                        imageUrl: "images/main_squirrel.png"
                     });
                     hasAlertedThank = true;
                 }
@@ -1000,6 +971,11 @@ XMing.GameStateManager = new
             });
             $(".letter").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                 $(this).removeClass("shake fadeIn");
+            });
+
+            swal({
+                title: "Thanks for playing!!!",
+                imageUrl: "images/love.png"
             });
         };
         // check game state
