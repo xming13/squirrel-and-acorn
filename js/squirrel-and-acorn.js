@@ -2,7 +2,7 @@ var XMing = XMing || {};
 XMing.GameStateManager = new
 
     function() {
-        var windowWidth;
+        var windowWidth = 0;
         var gameState;
         var roundNumber = 0;
         var nodes = [];
@@ -576,7 +576,6 @@ XMing.GameStateManager = new
             direction: 1
         }];
         this.init = function() {
-            windowWidth = $(window).width();
             window.addEventListener("resize", this.onResize.bind(this), false);
             this.initGame();
         };
@@ -807,11 +806,10 @@ XMing.GameStateManager = new
         };
         this.startGame = function() {
             gameState = GAME_STATE_ENUM.START;
-            var self = this;
             roundNumber = 0;
             $("#replay").hide();
+            this.loadData();
             this.onResize();
-            self.loadData();
         };
         this.endGame = function() {
             gameState = GAME_STATE_ENUM.END;
