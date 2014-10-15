@@ -164,6 +164,30 @@ XMing.GameStateManager = new
                 isFixed: false
             }, {
                 index: 1,
+                direction: 0,
+                isFixed: false
+            }, {
+                index: 12,
+                direction: 3,
+                isFixed: true
+            }, {
+                index: 19,
+                direction: 0,
+                isFixed: false
+            }, {
+                index: 23,
+                direction: 3,
+                isFixed: false
+            }],
+            disabledNodes: [6, 8, 16, 18]
+        }, {
+            acornNodes: [2, 4, 10, 12, 14, 20, 22],
+            directionNodes: [{
+                index: 0,
+                direction: 1,
+                isFixed: false
+            }, {
+                index: 1,
                 direction: 1,
                 isFixed: true
             }, {
@@ -400,30 +424,6 @@ XMing.GameStateManager = new
                 isFixed: false
             }],
             disabledNodes: [12]
-        }, {
-            acornNodes: [2, 4, 10, 12, 14, 20, 22],
-            directionNodes: [{
-                index: 0,
-                direction: 1,
-                isFixed: false
-            }, {
-                index: 1,
-                direction: 0,
-                isFixed: false
-            }, {
-                index: 12,
-                direction: 3,
-                isFixed: true
-            }, {
-                index: 19,
-                direction: 0,
-                isFixed: false
-            }, {
-                index: 23,
-                direction: 3,
-                isFixed: false
-            }],
-            disabledNodes: [6, 8, 16, 18]
         }, {
             acornNodes: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
             directionNodes: [{
@@ -715,7 +715,7 @@ XMing.GameStateManager = new
                     if (i == 24) {
                         img = $("<img>", {
                             src: "images/acorn_big.png",
-                            class: "acorn"
+                            class: "acorn acorn-big animated rubberBand"
                         });
                         li.append(img);
                     } else {
@@ -782,7 +782,8 @@ XMing.GameStateManager = new
                         swal({
                             title: "Good Job!",
                             type: "success",
-                            confirmButtonText: "Next"
+                            confirmButtonText: "Next",
+                            confirmButtonColor: "#59FF6D"
                         }, function() {
                             self.loadNextRound();
                             $('html, body').animate({
@@ -873,6 +874,14 @@ XMing.GameStateManager = new
                     letter: "R"
                 }],
                 directionNodes: [{
+                    index: 0,
+                    direction: 1,
+                    isFixed: false
+                }, {
+                    index: 1,
+                    direction: 0,
+                    isFixed: false
+                }, {
                     index: 4,
                     direction: 2,
                     isFixed: true
@@ -903,7 +912,7 @@ XMing.GameStateManager = new
                 if (i == 24) {
                     img = $("<img>", {
                         src: "images/acorn_big.png",
-                        class: "acorn"
+                        class: "acorn acorn-big animated rubberBand"
                     });
                     li.append(img);
                 } else {
@@ -913,7 +922,7 @@ XMing.GameStateManager = new
                     // check if it is letter node
                     if (letterNodes.length > 0) {
                         var div = $("<div>", {
-                            class: "content animated fadeIn",
+                            class: "content animated fadeIn letter",
                             html: letterNodes[0].letter
                         });
                         li.append(div);
@@ -984,6 +993,13 @@ XMing.GameStateManager = new
                     });
                     hasAlertedThank = true;
                 }
+            });
+
+            $(".letter").click(function() {
+                $(this).addClass("shake");
+            });
+            $(".letter").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                $(this).removeClass("shake fadeIn");
             });
         };
         // check game state
