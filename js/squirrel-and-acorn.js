@@ -781,7 +781,7 @@ XMing.GameStateManager = new
                     $(li).height(maxWidth);
                 });
                 $("ul.game-grid").width(maxWidth * 5);
-                var styles = "<style>" + ".game-grid li { height: " + maxWidth + "px; } " + ".game-grid li .content { font-size: " + (maxWidth * 0.5) + "px; } " + "#result-content { font-size: " + (maxWidth * 0.8) + "px; } " + ".game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } " + "</style>";
+                var styles = "<style>" + " ul.game-grid { width: " + (maxWidth * 5) + "px } .game-grid li { height: " + maxWidth + "px; } " + ".game-grid li .content { font-size: " + (maxWidth * 0.5) + "px; } " + "#result-content { font-size: " + (maxWidth * 0.8) + "px; } " + ".game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } " + "</style>";
                 if (injectedStyleDiv) {
                     injectedStyleDiv.html(styles);
                 } else {
@@ -809,6 +809,9 @@ XMing.GameStateManager = new
             roundNumber = 0;
             $("#replay").hide();
             this.loadData();
+
+            // set to 0 to force resize
+            windowWidth = 0;
             this.onResize();
         };
         this.endGame = function() {
