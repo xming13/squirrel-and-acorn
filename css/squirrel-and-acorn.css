@@ -112,7 +112,8 @@ a {
 }
 
 .icon-home:before,
-.icon-github:before {
+.icon-github:before,
+.icon-info:before {
     font-family: 'fontawesome';
     position: absolute;
     top: 0;
@@ -135,6 +136,9 @@ a {
     content: "\f113";
 }
 
+.icon-info:before {
+    content: "\f129";
+}
 .main-content {
     background: #70FF00;
     -webkit-border-radius: 10px;

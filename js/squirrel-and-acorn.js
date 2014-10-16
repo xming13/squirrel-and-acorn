@@ -960,7 +960,7 @@ XMing.GameStateManager = new
                 if (self.checkPath(true) && !hasAlertedThank) {
                     swal({
                         title: "8512",
-                        text: "The number of different paths for the squirrel to move from top left to bottom right!",
+                        text: "The number of different paths for the squirrel to move from top left to bottom right without visiting the same square twice!",
                         imageUrl: "images/main_squirrel.png"
                     });
                     hasAlertedThank = true;
