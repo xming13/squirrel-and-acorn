@@ -286,6 +286,82 @@ XMing.GameStateManager = new
             }],
             disabledNodes: [11, 13]
         }, {
+            acornNodes: [5, 7, 9, 10, 12, 13, 15, 17, 19],
+            directionNodes: [{
+                index: 0,
+                direction: 2,
+                isFixed: false
+            },  {
+                index: 5,
+                direction: 3,
+                isFixed: false
+            }, {
+                index: 7,
+                direction: 3,
+                isFixed: true
+            }, {
+                index: 9,
+                direction: 3,
+                isFixed: true
+            },  {
+                index: 10,
+                direction: 1,
+                isFixed: true
+            }, {
+                index: 12,
+                direction: 1,
+                isFixed: true
+            }, {
+                index: 13,
+                direction: 1,
+                isFixed: true
+            },{
+                index: 17,
+                direction: 3,
+                isFixed: true
+            },{
+                index: 19,
+                direction: 3,
+                isFixed: true
+            }, {
+                index: 23,
+                direction: 2,
+                isFixed: false
+            }],
+            disabledNodes: []
+        }, {
+            acornNodes: [1, 6, 11, 17, 18, 19],
+            directionNodes: [{
+                index: 0,
+                direction: 3,
+                isFixed: false
+            }, {
+                index: 1,
+                direction: 1,
+                isFixed: true
+            },  {
+                index: 6,
+                direction: 0,
+                isFixed: true
+            }, {
+                index: 11,
+                direction: 1,
+                isFixed: true
+            }, {
+                index: 17,
+                direction: 2,
+                isFixed: true
+            }, {
+                index: 18,
+                direction: 0,
+                isFixed: true
+            }, {
+                index: 19,
+                direction: 2,
+                isFixed: true
+            }],
+            disabledNodes: [15, 16, 20, 21]
+        }, {
             acornNodes: [5, 7, 9, 16, 18, 21, 23],
             directionNodes: [{
                 index: 0,
