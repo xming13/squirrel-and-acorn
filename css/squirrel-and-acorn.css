@@ -113,7 +113,7 @@ a {
 
 .icon-home:before,
 .icon-github:before,
-.icon-info:before,
+.icon-calculator:before,
 .icon-games:before {
     font-family: 'fontawesome';
     position: absolute;
@@ -137,9 +137,10 @@ a {
     content: "\f113";
 }
 
-.icon-info:before {
-    content: "\f129";
+.icon-calculator:before {
+    content: "\f1ec";
 }
+
 .icon-games:before {
     content: "\f11b";
 }
