@@ -849,15 +849,15 @@ XMing.GameStateManager = new
                 windowWidth = $(window).width();
 
                 var lis = $(".game-grid").children("li");
-                var liMaxWidth = _.max(lis, function(li) {
-                    return $(li).width();
+                var liMaxLength = _.max(lis, function(li) {
+                    return $(li).width() > $(li).height() ? $(li).width() : $(li).height();
                 });
-                var maxWidth = $(liMaxWidth).width();
+                var maxLength = $(liMaxLength).width() > $(liMaxLength).height() ? $(liMaxLength).width() : $(liMaxLength).height();
                 _.each(lis, function(li) {
-                    $(li).height(maxWidth);
+                    $(li).height(maxLength);
                 });
-                $("ul.game-grid").width(maxWidth * 5);
-                var styles = "<style>" + " ul.game-grid { width: " + (maxWidth * 5) + "px; } .game-grid li { height: " + maxWidth + "px; } " + ".game-grid li .content { font-size: " + (maxWidth * 0.5) + "px; } " + "#result-content { font-size: " + (maxWidth * 0.8) + "px; } " + ".game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } " + "</style>";
+                $("ul.game-grid").width(maxLength * 5);
+                var styles = "<style>" + " ul.game-grid { width: " + (maxLength * 5) + "px; } .game-grid li { height: " + maxLength + "px; } " + ".game-grid li .content { font-size: " + (maxLength * 0.5) + "px; } " + "#result-content { font-size: " + (maxLength * 0.8) + "px; } " + ".game-letters span { font-size: " + (maxLength * 0.2) + "px; margin-left: " + (maxLength * 0.1) + "px; } " + "</style>";
                 if (injectedStyleDiv) {
                     injectedStyleDiv.html(styles);
                 } else {
