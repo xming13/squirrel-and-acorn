@@ -113,7 +113,8 @@ a {
 
 .icon-home:before,
 .icon-github:before,
-.icon-info:before {
+.icon-info:before,
+.icon-games:before {
     font-family: 'fontawesome';
     position: absolute;
     top: 0;
@@ -139,6 +140,10 @@ a {
 .icon-info:before {
     content: "\f129";
 }
+.icon-games:before {
+    content: "\f11b";
+}
+
 .main-content {
     background: #70FF00;
     -webkit-border-radius: 10px;
