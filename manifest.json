@@ -1,0 +1,17 @@
+{
+    "short_name": "Squirrel and Acorn",
+    "name": "Squirrel and Acorn",
+    "icons": [
+        {
+            "src": "images/main_squirrel.png",
+            "sizes": "150x150"
+        },
+        {
+            "src": "images/squirrel-and-acorn-og.png",
+            "sizes": "200x200"
+        }
+    ],
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "orientation": "portrait"
+}
