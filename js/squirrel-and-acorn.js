@@ -741,7 +741,36 @@ XMing.GameStateManager = new
                 node.removeClass("selected up right down left");
             });
             var numAcornTotal = isGameOverScreen ? 15 : nodeArray[roundNumber].acornNodes.length;
-            return _.indexOf(nodes, _.last(currentPath)) == 24 && numAcornCollected == numAcornTotal;
+
+            // reach the last node
+            if (_.indexOf(nodes, _.last(currentPath)) == 24) {
+                // collected all acorns
+                if (numAcornCollected == numAcornTotal) {
+                    return true;
+                }
+                // some acorns are not collected
+                // so we add background color and animation to those acorns
+                // as an indication to user that these acorns are missed out
+                else {
+                    _.each(nodes, function(node) {
+                        if (node.hasClass("node-acorn") && !node.hasClass("selected")) {
+                            node.addClass("warning");
+
+                            var imgAcorn = node.find(".acorn");
+                            imgAcorn.addClass("animated flash");
+
+                            imgAcorn.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                                node.removeClass("warning");
+                                imgAcorn.removeClass("animated flash");
+                            });
+                        }
+                    });
+
+                    return false;
+                }
+            }
+
+            return false;
         };
         this.loadGrid = function() {
             $(".game-grid").html("");

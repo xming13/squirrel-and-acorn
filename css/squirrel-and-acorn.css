@@ -307,7 +307,7 @@ a {
     border-right: 1px solid #002e00;
 }
 .game-grid li.node-fixed.left,
- .game-grid li.node-fixed.left:hover {
+.game-grid li.node-fixed.left:hover {
      border-left: 1px solid #002e00;
  }
 .game-grid li.node-fixed.down,
@@ -336,8 +336,8 @@ a {
     border-left: 1px solid #888;
 }
 
-.game-grid li.node-acorn {
-
+.game-grid li.node-acorn.warning {
+    background-color: #FF6363;
 }
 
 .game-grid li.selected {
