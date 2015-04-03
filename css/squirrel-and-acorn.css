@@ -309,6 +309,13 @@ a {
     background-color: #002e00;
 }
 
+.menu-grid li span {
+    position: absolute;
+    left: 10px;
+    font-size: 30px;
+    color: #098109;
+}
+
 .board-grid li:hover {
     background-color: #fff;
     color: #00FF00;
@@ -464,5 +471,10 @@ and (max-device-width: 540px) {
         width: 20px;
         height: 20px;
         font-size: 13px;
+    }
+
+    .menu-grid li span {
+        left: 5px;
+        font-size: 15px;
     }
 }

@@ -885,8 +885,11 @@ XMing.GameStateManager = new
                         rotate: '+=90deg'
                     });
                     if (self.checkPath()) {
-                        data.level = roundNumber + 1;
-                        self.saveData(data);
+                        if (data.level === roundNumber) {
+                            // unlock the next level
+                            data.level++;
+                            self.saveData(data);
+                        }
 
                         _.delay(function () {
                             swal({
@@ -1007,7 +1010,13 @@ XMing.GameStateManager = new
                         $li.addClass('locked');
                     }
                     else {
-                        $li.html('<img src="images/acorn.png" class="acorn-big"/>');
+                        if (i === data.level) {
+                            $li.html('<img src="images/acorn.png" class="acorn-big animated tada"/><span>' + i + '</span>');
+                        }
+                        else {
+                            $li.html('<img src="images/acorn.png" class="acorn-big"/><span>' + i + '</span>');
+                        }
+
                         (function clickHandler(index) {
                             $li.click(function () {
                                 self.startGame(index);
