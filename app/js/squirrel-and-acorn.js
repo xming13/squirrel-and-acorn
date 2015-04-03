@@ -9,6 +9,7 @@ function() {
     var data;
     var nodes = [];
     var injectedStyleDiv;
+    var VERSION_NUMBER = 1;
     var GAME_STATE_ENUM = {
         INITIAL: "initial",
         MENU: 'menu',
@@ -886,7 +887,7 @@ function() {
                 });
                 if (self.checkPath()) {
                     if (data.level === roundNumber) {
-                        // unlock the next level
+                        // unlock the next level!
                         data.level++;
                         self.saveData(data);
                     }
@@ -970,7 +971,6 @@ function() {
             if (roundNumber < nodeArray.length) {
                 swal({
                     title: "Are you sure?",
-                    text: "Progress for this round (Round " + (roundNumber + 1) + ") will be gone.",
                     type: "warning",
                     showCancelButton: true
                 }, function() {
@@ -1246,11 +1246,16 @@ function() {
         if (window.localStorage) {
             var data = window.localStorage.getItem('data');
             if (data) {
-                return data && JSON.parse(decodeURIComponent(atob(data)));
+                var parsedData = JSON.parse(decodeURIComponent(atob(data)));
+                // make sure version is the same
+                if (parsedData.version === VERSION_NUMBER) {
+                    return parsedData;
+                }
             }
         }
         return {
-            level: 0
+            level: 0,
+            version: VERSION_NUMBER
         };
     };
 };
