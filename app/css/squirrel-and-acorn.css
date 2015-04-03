@@ -256,6 +256,7 @@ a {
     left: 40px;
     width: 95px;
     text-align: right;
+    font-weight: bold;
     color: #009400;
     opacity: 0;
     pointer-events: none;
