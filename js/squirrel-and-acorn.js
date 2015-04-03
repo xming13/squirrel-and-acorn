@@ -1,18 +1,40 @@
 var XMing = XMing || {};
-XMing.GameStateManager = new
 
-    function() {
+XMing.GameStateManager = new
+    function () {
         var windowWidth = 0;
         var gameState;
         var roundNumber = 0;
+        var data;
         var nodes = [];
         var injectedStyleDiv;
         var GAME_STATE_ENUM = {
             INITIAL: "initial",
+            MENU: 'menu',
             START: "start",
             PAUSE: "pause",
             END: "end"
         };
+
+        /**
+         * This array provides the data of the nodes for each round of the game.
+         *
+         * Position of the nodes is as follows:
+         * | 0| 1| 2| 3| 4|
+         * | 5| 6| 7| 8| 9|
+         * |10|11|12|13|14|
+         * |15|16|17|18|19|
+         * |20|21|22|23|24|
+         *
+         * acornNodes: an array of the position of the nodes that have acorn.
+         *
+         * directionNodes: Provides the initial direction of the node.
+         * - index: position of the node.
+         * - direction: 0 up, 1 right, 2 down, 3 left
+         * - isFixed: if set to true, player cannot rotate the direction.
+         *
+         * disabledNodes: an array of the position of nodes that are disabled. Disabled nodes do not have direction.
+         */
         var nodeArray = [{
             acornNodes: [2, 4, 14],
             directionNodes: [{
@@ -291,7 +313,7 @@ XMing.GameStateManager = new
                 index: 0,
                 direction: 2,
                 isFixed: false
-            },  {
+            }, {
                 index: 5,
                 direction: 3,
                 isFixed: false
@@ -303,7 +325,7 @@ XMing.GameStateManager = new
                 index: 9,
                 direction: 3,
                 isFixed: true
-            },  {
+            }, {
                 index: 10,
                 direction: 1,
                 isFixed: true
@@ -315,11 +337,11 @@ XMing.GameStateManager = new
                 index: 13,
                 direction: 1,
                 isFixed: true
-            },{
+            }, {
                 index: 17,
                 direction: 3,
                 isFixed: true
-            },{
+            }, {
                 index: 19,
                 direction: 3,
                 isFixed: true
@@ -339,7 +361,7 @@ XMing.GameStateManager = new
                 index: 1,
                 direction: 1,
                 isFixed: true
-            },  {
+            }, {
                 index: 6,
                 direction: 0,
                 isFixed: true
@@ -590,6 +612,19 @@ XMing.GameStateManager = new
             }],
             disabledNodes: [12]
         }];
+
+        /**
+         * This array provides a list of directions that are not accessible by the nodes at the boundary.
+         *
+         * For example:
+         * an object { nodeIndex: 0, direction: 0 } indicates that to move node 0 in the direction 0 (up) is not allowed
+         * as it will be out of the grid.
+         *
+         * nodeIndex is the position of the node
+         *
+         * direction is
+         * 0: up, 1: right, 2: down, 3: left
+         */
         var directionExceptions = [{
             nodeIndex: 0,
             direction: 0
@@ -651,29 +686,22 @@ XMing.GameStateManager = new
             nodeIndex: 24,
             direction: 1
         }];
-        this.init = function() {
-            window.addEventListener("resize", this.onResize.bind(this), false);
-            this.initGame();
-        };
-        this.getDirectionClass = function(direction) {
-            var directionClass = "";
+
+        this.getDirectionClass = function (direction) {
             switch (direction) {
                 case 0:
-                    directionClass = "up";
-                    break;
+                    return "up";
                 case 1:
-                    directionClass = "right";
-                    break;
+                    return "right";
                 case 2:
-                    directionClass = "down";
-                    break;
+                    return "down";
                 case 3:
-                    directionClass = "left";
-                    break;
+                    return "left";
+                default:
+                    return "";
             }
-            return directionClass;
         };
-        this.addNodeDirectionClass = function(nodeIndex, direction) {
+        this.addNodeDirectionClass = function (nodeIndex, direction) {
             var exceptionMatch = _.matches({
                 nodeIndex: nodeIndex,
                 direction: direction
@@ -684,14 +712,18 @@ XMing.GameStateManager = new
             }
             nodes[nodeIndex].addClass(this.getDirectionClass(direction));
         };
-        this.checkPath = function(isGameOverScreen) {
+
+        // This function handles adding/removing classes for the node based on its state
+        // and returns true if game success condition is met
+        this.checkPath = function () {
             var numAcornCollected = 0;
             var currentPath = [];
             var nodeIndex = 0;
             var directionFrom = -1;
+
             while (nodeIndex > -1) {
                 var currentNode = nodes[nodeIndex];
-                var classToCheck = isGameOverScreen ? "node-gameover" : "node-disabled";
+                var classToCheck = this.isGameStateEnd() ? "node-gameover" : "node-disabled";
                 if (!_.contains(currentPath, currentNode) && !currentNode.hasClass(classToCheck)) {
                     currentNode.removeClass("up right down left");
                     currentNode.addClass("selected");
@@ -737,29 +769,29 @@ XMing.GameStateManager = new
                     nodeIndex = -1;
                 }
             }
-            _.each(_.difference(nodes, currentPath), function(node) {
+            _.each(_.difference(nodes, currentPath), function (node) {
                 node.removeClass("selected up right down left");
             });
-            var numAcornTotal = isGameOverScreen ? 15 : nodeArray[roundNumber].acornNodes.length;
+            var numAcornTotal = this.isGameStateEnd() ? 15 : nodeArray[roundNumber].acornNodes.length;
 
             // reach the last node
             if (_.indexOf(nodes, _.last(currentPath)) == 24) {
                 // collected all acorns
-                if (numAcornCollected == numAcornTotal) {
+                if (numAcornCollected === numAcornTotal) {
                     return true;
                 }
                 // some acorns are not collected
                 // so we add background color and animation to those acorns
                 // as an indication to user that these acorns are missed out
                 else {
-                    _.each(nodes, function(node) {
+                    _.each(nodes, function (node) {
                         if (node.hasClass("node-acorn") && !node.hasClass("selected")) {
                             node.addClass("warning");
 
                             var imgAcorn = node.find(".acorn");
                             imgAcorn.addClass("animated flash");
 
-                            imgAcorn.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                            imgAcorn.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                                 node.removeClass("warning");
                                 imgAcorn.removeClass("animated flash");
                             });
@@ -772,8 +804,9 @@ XMing.GameStateManager = new
 
             return false;
         };
-        this.loadGrid = function() {
-            $(".game-grid").html("");
+        this.setupGrid = function () {
+            $(".round-number").html("Round " + (roundNumber + 1));
+            $(".board-grid").html("");
             nodes = [];
             for (var i = 0; i < 25; i++) {
                 var node = nodeArray[roundNumber];
@@ -831,72 +864,82 @@ XMing.GameStateManager = new
                     li.append(imgAcorn);
                 }
                 nodes.push(li);
-                $(".game-grid").append(li);
+                $(".board-grid").append(li);
             }
-            this.checkPath(false);
-            $(".game-grid").addClass("animated fadeIn");
-            $(".game-grid.animated.fadeIn").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-                $(".game-grid.animated.fadeIn").removeClass("animated fadeIn");
+            this.checkPath();
+            $(".board-grid").addClass("animated fadeIn");
+            $(".board-grid.animated.fadeIn").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(".board-grid.animated.fadeIn").removeClass("animated fadeIn");
             });
         };
-        this.loadData = function() {
-            var self = this;
-            this.loadGrid();
-            $("ul.game-grid li:not(.node-fixed):not(.node-disabled)").click(function() {
-                $(this).data("direction", ($(this).data("direction") + 1) % 4);
-                $(this).find("img.arrow").transition({
-                    rotate: '+=90deg'
-                });
-                if (self.checkPath(false)) {
-                    _.delay(function() {
-                        swal({
-                            title: "Good Job!",
-                            type: "success",
-                            confirmButtonText: "Next",
-                            confirmButtonColor: "#59FF6D",
-                            closeOnConfirm: roundNumber + 1 != nodeArray.length
-                        }, function() {
-                            self.loadNextRound();
-                            $('html, body').animate({
-                                scrollTop: $("#panel-container").offset().top
-                            }, 'fast');
-                        })
-                    }, 300);
-                }
-            });
-        };
-        this.loadNextRound = function() {
-            var self = this;
-            if (++roundNumber == nodeArray.length) {
-                self.endGame();
-            } else {
-                self.loadData();
+        this.setupGameNode = function () {
+            if (roundNumber === nodeArray.length) {
+                this.endGame();
             }
-        };
-        this.onResize = function(event) {
-            if($(window).width() != windowWidth){
-                windowWidth = $(window).width();
-				
-				if (injectedStyleDiv) {
-                    injectedStyleDiv.html("");
-                } 
+            else {
+                var self = this;
+                this.setupGrid();
+                $("ul.board-grid li:not(.node-fixed):not(.node-disabled)").click(function () {
+                    $(this).data("direction", ($(this).data("direction") + 1) % 4);
+                    $(this).find("img.arrow").transition({
+                        rotate: '+=90deg'
+                    });
+                    if (self.checkPath()) {
+                        data.level = roundNumber + 1;
+                        self.saveData(data);
 
-                var lis = $(".game-grid").children("li");
-                var liMaxWidth = _.max(lis, function(li) {
+                        _.delay(function () {
+                            swal({
+                                title: "Congrats!",
+                                text: "Go to the next stage!",
+                                type: "success",
+                                confirmButtonText: "Next",
+                                confirmButtonColor: "#59FF6D",
+                                showCancelButton: true,
+                                cancelButtonText: "Menu",
+                                closeOnConfirm: roundNumber + 1 != nodeArray.length
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    roundNumber++;
+                                    self.setupGameNode();
+                                }
+                                else {
+                                    self.menuGame();
+                                }
+                            })
+                        }, 300);
+                    }
+                });
+            }
+        };
+
+        this.preloadImage = function () {
+            var imgLove = new Image();
+            imgLove.src = "images/love.png";
+        };
+        this.onResize = function (event) {
+            if ($(window).width() != windowWidth) {
+                windowWidth = $(window).width();
+
+                if (injectedStyleDiv) {
+                    injectedStyleDiv.html("");
+                }
+
+                var lis = $(".grid").children("li");
+                var liMaxWidth = _.max(lis, function (li) {
                     return $(li).width();
                 });
                 var maxWidth = $(liMaxWidth).width();
-				
-                var styles = "<style>" 
-				// +2px for the border
-				+ " ul.game-grid { width: " + (maxWidth * 5 + 2) + "px; } "
-				+ " .game-grid li { height: " + maxWidth + "px; width: " + maxWidth + "px; } " 
-				+ " .game-grid li .content { font-size: " + (maxWidth * 0.5) + "px; } " 
-				+ " #result-content { font-size: " + (maxWidth * 0.8) + "px; } " 
-				+ " .game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } " 
-				+ "</style>";
-                
-				if (injectedStyleDiv) {
+
+                var styles = "<style>"
+                        // +2px for the border
+                    + " ul.grid { width: " + (maxWidth * 5 + 2) + "px; } "
+                    + " .grid li { height: " + maxWidth + "px; width: " + maxWidth + "px; } "
+                    + " .grid li .content { font-size: " + (maxWidth * 0.5) + "px; } "
+                    + " .game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } "
+                    + "</style>";
+
+                if (injectedStyleDiv) {
                     injectedStyleDiv.html(styles);
                 } else {
                     injectedStyleDiv = $("<div />", {
@@ -905,33 +948,121 @@ XMing.GameStateManager = new
                 }
             }
         };
-        this.preloadImage = function() {
-            var imgLove = new Image();
-            imgLove.src = "images/love.png";
-        };
-        // game status operation
-        this.initGame = function() {
-            gameState = GAME_STATE_ENUM.INITIAL;
-            this.preloadImage();
+
+        // Game state operation
+        this.initGame = function () {
             var self = this;
-            $(".icon-repeat").click(function() {
-                self.startGame();
+            gameState = GAME_STATE_ENUM.INITIAL;
+
+            FastClick.attach(document.body);
+
+            window.addEventListener("resize", this.onResize.bind(this), false);
+
+            self.preloadImage();
+
+            data = this.loadData();
+
+            $(".btn-play").click(function () {
+                $("#panel-main").hide();
+                $("#panel-game").show();
+                self.menuGame();
+            });
+
+            $(".icon-menu").click(function () {
+                if (roundNumber < nodeArray.length) {
+                    swal({
+                        title: "Are you sure?",
+                        text: "Progress for this round (Round " + (roundNumber + 1) + ") will be gone.",
+                        type: "warning",
+                        showCancelButton: true
+                    }, function () {
+                        self.menuGame();
+                    });
+                }
+                else {
+                    self.menuGame();
+                }
             });
         };
-        this.startGame = function() {
-            gameState = GAME_STATE_ENUM.START;
-            roundNumber = 0;
-            $("#replay").hide();
-            this.loadData();
+        this.menuGame = function () {
+            var self = this;
+            gameState = GAME_STATE_ENUM.MENU;
+
+            $(".icon-menu-holder").hide();
+            $(".menu").show();
+            $(".board").hide();
+            $(".round-number").html("&nbsp;");
 
             // set to 0 to force resize
             windowWidth = 0;
             this.onResize();
+
+            $(".menu-grid").html("");
+
+            for (var i = 0; i < 25; i++) {
+                var $li = $("<li>");
+                if (i <= nodeArray.length - 1) {
+                    // level is locked
+                    if (i > data.level) {
+                        $li.addClass('locked');
+                    }
+                    else {
+                        $li.html('<img src="images/acorn.png" class="acorn-big"/>');
+                        (function clickHandler(index) {
+                            $li.click(function () {
+                                self.startGame(index);
+                            })
+                        })(i);
+                    }
+                }
+                else if (i === nodeArray.length) {
+                    // level is locked
+                    if (i > data.level) {
+                        $li.addClass('locked');
+                    }
+                    else {
+                        $li.html('<img src="images/love.png" style="width:80%; height:80%; margin: 10%;"/>');
+                        $li.click(function () {
+                            self.endGame();
+                        });
+                    }
+                }
+                else {
+                    $li.addClass('disabled');
+                }
+
+                $(".menu-grid").append($li);
+            }
+
+            $('html, body').animate({
+                scrollTop: $("#panel-container").offset().top
+            }, 'fast');
         };
-        this.endGame = function() {
+        this.startGame = function (index) {
+            gameState = GAME_STATE_ENUM.START;
+
+            $(".icon-menu-holder").show();
+            $(".menu").hide();
+            $(".board").show();
+
+            roundNumber = index;
+            this.setupGameNode();
+
+            $('html, body').animate({
+                scrollTop: $("#panel-container").offset().top
+            }, 'fast');
+        };
+        this.endGame = function () {
             gameState = GAME_STATE_ENUM.END;
             var self = this;
-            $(".game-grid").html("");
+
+            roundNumber = nodeArray.length;
+
+            $(".icon-menu-holder").show();
+            $(".menu").hide();
+            $(".board").show();
+
+            $(".board-grid").html("");
             var gameOverNode = {
                 acornNodes: [1, 2, 3, 4, 9, 10, 11, 12, 13, 14, 15, 20, 21, 22, 23],
                 letterNodes: [{
@@ -1060,47 +1191,66 @@ XMing.GameStateManager = new
                     li.append(imgAcorn);
                 }
                 nodes.push(li);
-                $(".game-grid").append(li);
+                $(".board-grid").append(li);
             }
-            this.checkPath(true);
+            this.checkPath();
 
-            $("#replay").show();
             var hasAlertedThank = false;
-            $("ul.game-grid li:not(.node-fixed):not(.node-disabled)").click(function() {
+            $("ul.board-grid li:not(.node-fixed):not(.node-disabled)").click(function () {
                 $(this).data("direction", ($(this).data("direction") + 1) % 4);
                 $(this).find("img.arrow").transition({
                     rotate: '+=90deg'
                 });
-                if (self.checkPath(true) && !hasAlertedThank) {
+                if (self.checkPath() && !hasAlertedThank) {
                     swal({
                         title: "8512",
                         text: "The number of different paths for the squirrel to move from top left to bottom right without visiting the same square twice!",
-                        imageUrl: "images/main_squirrel.png"
+                        imageUrl: "images/main_squirrel.png",
+                        closeOnConfirm: false
+                    }, function () {
+                        swal({
+                            title: "Thanks for playing!!!",
+                            imageUrl: "images/love.png"
+                        });
+                        hasAlertedThank = true;
                     });
-                    hasAlertedThank = true;
                 }
             });
 
-            $(".letter").click(function() {
+            $(".letter").click(function () {
                 $(this).addClass("shake");
             });
-            $(".letter").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $(".letter").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                 $(this).removeClass("shake fadeIn");
             });
 
-            swal({
-                title: "Thanks for playing!!!",
-                imageUrl: "images/love.png"
-            });
+
         };
-        // check game state
-        this.isGameStateInitial = function() {
+
+        // Check game state
+        this.isGameStateInitial = function () {
             return gameState == GAME_STATE_ENUM.INITIAL;
         };
-        this.isGameStateStart = function() {
+        this.isGameStateStart = function () {
             return gameState == GAME_STATE_ENUM.START;
         };
-        this.isGameStateEnd = function() {
+        this.isGameStateEnd = function () {
             return gameState == GAME_STATE_ENUM.END;
+        };
+
+        // Local storage
+        this.saveData = function (data) {
+            if (window.localStorage) {
+                window.localStorage.setItem('data', btoa(encodeURIComponent(JSON.stringify(data))));
+            }
+        };
+        this.loadData = function () {
+            if (window.localStorage) {
+                var data = window.localStorage.getItem('data');
+                if (data) {
+                    return data && JSON.parse(decodeURIComponent(atob(data)));
+                }
+            }
+            return {level: 0};
         };
     };

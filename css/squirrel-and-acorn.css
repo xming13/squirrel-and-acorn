@@ -53,11 +53,11 @@ a {
 }
 
 #container > header h1 {
-    font-size: 34px;
-    line-height: 1.3;
     margin: 0;
-    float: left;
+    font-size: 34px;
     font-weight: 400;
+    line-height: 1.3;
+    float: left;
 }
 
 #container > header span {
@@ -73,28 +73,29 @@ a {
 }
 
 #container > header nav a {
-    display: block;
-    float: left;
     position: relative;
     width: 40px;
     height: 40px;
+    margin: 0 2px;
     background: #fff;
+    color: transparent;
+    font-weight: bold;
+    border: 4px solid #0f0;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    color: transparent;
-    margin: 0 2px;
-    border: 4px solid #0f0;
+    display: block;
+    float: left;
 }
 
 #container > header nav a:after {
     content: attr(data-info);
-    color: #fff;
     position: absolute;
-    width: 600%;
     top: 120%;
-    text-align: right;
     right: 0;
+    width: 600%;
+    color: #fff;
+    text-align: right;
     opacity: 0;
     pointer-events: none;
 }
@@ -172,12 +173,12 @@ a {
     font-size: 21px;
     margin: 0 0 24px;
     letter-spacing: 1px;
-    color: rgba(255,255,255, 0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .sprite img {
     margin: 30px 0;
-    border: 1px solid#00ff00;
+    border: 1px solid #00ff00;
 }
 
 .btn-play {
@@ -208,10 +209,15 @@ a {
     margin: 0 auto;
 }
 
-#replay {
-    float: left;
+.scoreboard {
+    margin-bottom: 15px;
 }
-.icon-repeat {
+
+.icon-menu-holder {
+    position: absolute;
+}
+
+.icon-menu {
     display: block;
     float: left;
     position: relative;
@@ -225,7 +231,8 @@ a {
     border: 4px solid #19d300;
     cursor: pointer;
 }
-.icon-repeat:before {
+
+.icon-menu:before {
     font-family: 'fontawesome';
     position: absolute;
     top: 0;
@@ -239,39 +246,43 @@ a {
     text-align: center;
     color: #fff;
     -webkit-font-smoothing: antialiased;
-    content: "\f01e";
+    content: "\f053";
 }
 
-.icon-repeat:after {
+.icon-menu:after {
     content: attr(data-info);
-    color: #fff;
     position: absolute;
-    width: 90px;
     top: 5px;
+    left: 40px;
+    width: 95px;
     text-align: right;
-    left: 25px;
+    color: #009400;
     opacity: 0;
     pointer-events: none;
 }
-.icon-repeat:hover {
+
+.icon-menu:hover {
     background: #fff;
 }
-.icon-repeat:hover:before {
+
+.icon-menu:hover:before {
     color: #047a04;
 }
-.icon-repeat:hover:after {
+
+.icon-menu:hover:after {
     opacity: 1;
 }
 
-.scoreboard {
-    margin-bottom: 15px;
+.round-number {
+    color: #047A04;
+    font-size: 30px;
 }
 
-.gameboard {
+.board {
     position: relative;
 }
 
-.game-grid {
+.grid {
     margin: auto;
     padding: 0;
     list-style: none;
@@ -281,7 +292,7 @@ a {
     border: 1px solid #000;
 }
 
-.game-grid li {
+.grid li {
     display: table;
     position: relative;
     float: left;
@@ -289,105 +300,130 @@ a {
     cursor: pointer;
     border: 1px solid #000;
 }
-.game-grid li:hover {
+
+.menu-grid li.disabled {
+    background-color: #888;
+}
+
+.menu-grid li.locked {
+    background-color: #002e00;
+}
+
+.board-grid li:hover {
     background-color: #fff;
     color: #00FF00;
 }
 
-.game-grid li.node-fixed,
-.game-grid li.node-fixed:hover {
+.board-grid li.node-fixed,
+.board-grid li.node-fixed:hover {
     background-color: #002e00;
 }
-.game-grid li.node-fixed.up,
-.game-grid li.node-fixed.up:hover {
+
+.board-grid li.node-fixed.up,
+.board-grid li.node-fixed.up:hover {
     border-top: 1px solid #002e00;
 }
-.game-grid li.node-fixed.right,
-.game-grid li.node-fixed.right:hover {
+
+.board-grid li.node-fixed.right,
+.board-grid li.node-fixed.right:hover {
     border-right: 1px solid #002e00;
 }
-.game-grid li.node-fixed.left,
-.game-grid li.node-fixed.left:hover {
-     border-left: 1px solid #002e00;
- }
-.game-grid li.node-fixed.down,
-.game-grid li.node-fixed.down:hover {
+
+.board-grid li.node-fixed.left,
+.board-grid li.node-fixed.left:hover {
+    border-left: 1px solid #002e00;
+}
+
+.board-grid li.node-fixed.down,
+.board-grid li.node-fixed.down:hover {
     border-bottom: 1px solid #002e00;
 }
 
-.game-grid li.node-disabled,
-.game-grid li.node-disabled:hover {
+.board-grid li.node-disabled,
+.board-grid li.node-disabled:hover {
     background-color: #888;
 }
-.game-grid li.node-disabled.up,
-.game-grid li.node-disabled.up:hover {
+
+.board-grid li.node-disabled.up,
+.board-grid li.node-disabled.up:hover {
     border-top: 1px solid #888;
 }
-.game-grid li.node-disabled.right,
-.game-grid li.node-disabled.right:hover {
+
+.board-grid li.node-disabled.right,
+.board-grid li.node-disabled.right:hover {
     border-right: 1px solid #888;
 }
-.game-grid li.node-disabled.down,
-.game-grid li.node-disabled.down:hover {
+
+.board-grid li.node-disabled.down,
+.board-grid li.node-disabled.down:hover {
     border-bottom: 1px solid #888;
 }
-.game-grid li.node-disabled.left,
-.game-grid li.node-disabled.left:hover {
+
+.board-grid li.node-disabled.left,
+.board-grid li.node-disabled.left:hover {
     border-left: 1px solid #888;
 }
 
-.game-grid li.node-acorn.warning {
+.board-grid li.node-acorn.warning {
     background-color: #FF6363;
 }
 
-.game-grid li.selected {
+.board-grid li.selected {
     background-color: #bdffd2;
 }
-.game-grid li.selected.up {
+
+.board-grid li.selected.up {
     border-top: 1px solid #bdffd2;
 }
-.game-grid li.selected.right {
+
+.board-grid li.selected.right {
     border-right: 1px solid #bdffd2;
 }
-.game-grid li.selected.down {
+
+.board-grid li.selected.down {
     border-bottom: 1px solid #bdffd2;
 }
-.game-grid li.selected.left {
+
+.board-grid li.selected.left {
     border-left: 1px solid #bdffd2;
 }
 
-.game-grid li.selected:hover {
+.board-grid li.selected:hover {
     background-color: #f7ffa0;
 }
-.game-grid li.selected.up:hover {
+
+.board-grid li.selected.up:hover {
     border-top: 1px solid #f7ffa0;
 }
-.game-grid li.selected.right:hover {
+
+.board-grid li.selected.right:hover {
     border-right: 1px solid #f7ffa0;
 }
-.game-grid li.selected.down:hover {
+
+.board-grid li.selected.down:hover {
     border-bottom: 1px solid #f7ffa0;
 }
-.game-grid li.selected.left:hover {
+
+.board-grid li.selected.left:hover {
     border-left: 1px solid #f7ffa0;
 }
 
-.game-grid li.selected.node-fixed,
-.game-grid li.selected.node-fixed:hover {
+.board-grid li.selected.node-fixed,
+.board-grid li.selected.node-fixed:hover {
     background-color: #3c833c;
 }
 
-.game-grid li.selected:after {
+.board-grid li.selected:after {
     opacity: 1;
 }
 
-.game-grid li .content {
+.board-grid li .content {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
 }
 
-.game-grid li img {
+.grid li img {
     display: block;
     position: absolute;
     width: 100%;
@@ -396,34 +432,17 @@ a {
 }
 
 img.squirrel {
-    -moz-animation-iteration-count:infinite;
-    -webkit-animation-iteration-count:infinite;
-    -ms-animation-iteration-count:infinite;
-    animation-iteration-count:infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
 img.acorn-big {
-    -moz-animation-iteration-count:infinite;
-    -webkit-animation-iteration-count:infinite;
-    -ms-animation-iteration-count:infinite;
-    animation-iteration-count:infinite;
-}
-
-#result {
-    position: absolute;
-    top: 0;
-    margin: 0 auto;
-    background: rgba(58, 58, 58, 0.8);
-    display: table;
-}
-
-#result-content {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    text-shadow: 0 0 5px #000; /* horizontal-offset vertical-offset 'blur' colour */
-    -moz-text-shadow: 0 0 5px #000;
-    -webkit-text-shadow: 0 0 5px #000;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
 /* Desktops and laptops ----------- */
@@ -431,9 +450,8 @@ img.acorn-big {
 }
 
 @media only screen
-and (min-device-width : 320px)
-and (max-device-width : 540px) {
-    /* Styles */
+and (min-device-width: 320px)
+and (max-device-width: 540px) {
     #container {
         width: 90%;
     }
@@ -442,13 +460,9 @@ and (max-device-width : 540px) {
         width: 100%;
     }
 
-    .game-grid li:after {
+    .grid li:after {
         width: 20px;
         height: 20px;
         font-size: 13px;
-    }
-
-    #result {
-        left: 0;
     }
 }
