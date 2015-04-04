@@ -900,8 +900,7 @@ function() {
                             confirmButtonText: "Next",
                             confirmButtonColor: "#59FF6D",
                             showCancelButton: true,
-                            cancelButtonText: "Menu",
-                            closeOnConfirm: roundNumber + 1 != nodeArray.length
+                            cancelButtonText: "Menu"
                         }, function(isConfirm) {
                             if (isConfirm) {
                                 roundNumber++;
@@ -1004,9 +1003,9 @@ function() {
                     $li.addClass('locked');
                 } else {
                     if (i === data.level) {
-                        $li.html('<img src="images/acorn.png" class="acorn-big animated tada"/><span>' + i + '</span>');
+                        $li.html('<img src="images/acorn.png" class="acorn-big animated tada"/><span>' + (i + 1) + '</span>');
                     } else {
-                        $li.html('<img src="images/acorn.png" class="acorn-big"/><span>' + i + '</span>');
+                        $li.html('<img src="images/acorn.png" class="acorn-big"/><span>' + (i + 1) + '</span>');
                     }
 
                     (function clickHandler(index) {
@@ -1056,6 +1055,7 @@ function() {
 
         roundNumber = nodeArray.length;
 
+        $(".round-number").html("");
         $(".icon-menu-holder").show();
         $(".menu").hide();
         $(".board").show();
