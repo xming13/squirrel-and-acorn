@@ -439,14 +439,7 @@ a {
     max-width: 100%;
 }
 
-img.squirrel {
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-    -ms-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-}
-
-img.acorn-big {
+img.squirrel, img.acorn-big, img.love {
     -moz-animation-iteration-count: infinite;
     -webkit-animation-iteration-count: infinite;
     -ms-animation-iteration-count: infinite;

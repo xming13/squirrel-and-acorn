@@ -6,7 +6,7 @@ function() {
     var windowWidth = 0;
     var gameState;
     var roundNumber = 0;
-    var data;
+    var userData;
     var nodes = [];
     var injectedStyleDiv;
     var VERSION_NUMBER = 1;
@@ -886,10 +886,10 @@ function() {
                     rotate: '+=90deg'
                 });
                 if (self.checkPath()) {
-                    if (data.level === roundNumber) {
+                    if (userData.level === roundNumber) {
                         // unlock the next level!
-                        data.level++;
-                        self.saveData(data);
+                        userData.level++;
+                        self.saveData(userData);
                     }
 
                     _.delay(function() {
@@ -950,6 +950,7 @@ function() {
     // Game state operation
     this.initGame = function() {
         var self = this;
+
         gameState = GAME_STATE_ENUM.INITIAL;
 
         FastClick.attach(document.body);
@@ -958,7 +959,7 @@ function() {
 
         self.preloadImage();
 
-        data = this.loadData();
+        userData = this.loadData();
 
         $(".btn-play").click(function() {
             $("#panel-main").hide();
@@ -999,10 +1000,10 @@ function() {
             var $li = $("<li>");
             if (i <= nodeArray.length - 1) {
                 // level is locked
-                if (i > data.level) {
+                if (i > userData.level) {
                     $li.addClass('locked');
                 } else {
-                    if (i === data.level) {
+                    if (i === userData.level) {
                         $li.html('<img src="images/acorn.png" class="acorn-big animated tada"/><span>' + (i + 1) + '</span>');
                     } else {
                         $li.html('<img src="images/acorn.png" class="acorn-big"/><span>' + (i + 1) + '</span>');
@@ -1016,10 +1017,10 @@ function() {
                 }
             } else if (i === nodeArray.length) {
                 // level is locked
-                if (i > data.level) {
+                if (i > userData.level) {
                     $li.addClass('locked');
                 } else {
-                    $li.html('<img src="images/love.png" style="width:80%; height:80%; margin: 10%;"/>');
+                    $li.html('<img src="images/love.png" style="width:80%; height:80%; margin: 10%;" class="animated tada love"/>');
                     $li.click(function() {
                         self.endGame();
                     });
@@ -1055,7 +1056,7 @@ function() {
 
         roundNumber = nodeArray.length;
 
-        $(".round-number").html("");
+        $(".round-number").html("Bonus");
         $(".icon-menu-holder").show();
         $(".menu").hide();
         $(".board").show();
@@ -1193,24 +1194,47 @@ function() {
         }
         this.checkPath();
 
-        var hasAlertedThank = false;
         $("ul.board-grid li:not(.node-fixed):not(.node-disabled)").click(function() {
             $(this).data("direction", ($(this).data("direction") + 1) % 4);
             $(this).find("img.arrow").transition({
                 rotate: '+=90deg'
             });
-            if (self.checkPath() && !hasAlertedThank) {
+            if (self.checkPath()) {
                 swal({
                     title: "8512",
                     text: "The number of different paths for the squirrel to move from top left to bottom right without visiting the same square twice!",
                     imageUrl: "images/main_squirrel.png",
-                    closeOnConfirm: false
+                    closeOnConfirm: userData.inHallOfFame
                 }, function() {
                     swal({
                         title: "Thanks for playing!!!",
-                        imageUrl: "images/love.png"
+                        imageUrl: "images/love.png",
+                        type: "input",
+                        text: "Write your name here! It will appear in the Hall of Fame!",
+                        closeOnConfirm: false
+                    }, function(playerName) {
+                        if (playerName === "") {
+                            swal.showInputError("You need to write something! A nickname is fine too!");
+                            return false;
+                        }
+
+                        $.ajax({
+                            method: "POST",
+                            url: 'http://weiseng.redairship.com/leaderboard/api/1/highscore.json',
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                game_id: 1,
+                                username: playerName,
+                                score: roundNumber
+                            })
+                        }).success(function(data) {
+                            swal("Congratulations!", "You are the " + data.rank_text + " one to solve all the puzzles!", "success");
+                            userData.inHallOfFame = true;
+                            self.saveData(userData);
+                        }).error(function(data) {
+                            swal("Oops...", "Something went wrong!", "error");
+                        });
                     });
-                    hasAlertedThank = true;
                 });
             }
         });
@@ -1221,8 +1245,6 @@ function() {
         $(".letter").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
             $(this).removeClass("shake fadeIn");
         });
-
-
     };
 
     // Check game state
@@ -1237,9 +1259,9 @@ function() {
     };
 
     // Local storage
-    this.saveData = function(data) {
+    this.saveData = function(userData) {
         if (window.localStorage) {
-            window.localStorage.setItem('data', btoa(encodeURIComponent(JSON.stringify(data))));
+            window.localStorage.setItem('data', btoa(encodeURIComponent(JSON.stringify(userData))));
         }
     };
     this.loadData = function() {
@@ -1255,7 +1277,8 @@ function() {
         }
         return {
             level: 0,
-            version: VERSION_NUMBER
+            version: VERSION_NUMBER,
+            inHallOfHame: false
         };
     };
 };
