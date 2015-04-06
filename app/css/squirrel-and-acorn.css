@@ -181,9 +181,15 @@ a {
     border: 1px solid #00ff00;
 }
 
-.btn-play {
+.button-holder {
+    margin-bottom: 5px;
+}
+
+.btn-play,
+.btn-hall-of-fame {
     display: inline-block;
-    padding: 10px 70px;
+    padding: 10px 0;
+    width: 174px;
     font-size: 15px;
     font-weight: normal;
     text-align: center;
@@ -196,28 +202,33 @@ a {
     cursor: pointer;
 }
 
-.btn-play:hover {
+.btn-play:hover,
+.btn-hall-of-fame:hover {
     color: #fff;
     background-color: #29E229;
     border-color: #79FF79;
     outline: 0px none;
 }
 
-.panel-game {
+.panel-game,
+.panel-hall-of-fame {
     position: relative;
     width: 63%;
     margin: 0 auto;
+    min-height: 327px;
 }
 
 .scoreboard {
+    height: 35px;
     margin-bottom: 15px;
 }
 
+.icon-home-holder,
 .icon-menu-holder {
     position: absolute;
 }
 
-.icon-menu {
+.icon-back {
     display: block;
     float: left;
     position: relative;
@@ -232,7 +243,7 @@ a {
     cursor: pointer;
 }
 
-.icon-menu:before {
+.icon-back:before {
     font-family: 'fontawesome';
     position: absolute;
     top: 0;
@@ -249,7 +260,7 @@ a {
     content: "\f053";
 }
 
-.icon-menu:after {
+.icon-back:after {
     content: attr(data-info);
     position: absolute;
     top: 5px;
@@ -262,19 +273,20 @@ a {
     pointer-events: none;
 }
 
-.icon-menu:hover {
+.icon-back:hover {
     background: #fff;
 }
 
-.icon-menu:hover:before {
+.icon-back:hover:before {
     color: #047a04;
 }
 
-.icon-menu:hover:after {
+.icon-back:hover:after {
     opacity: 1;
 }
 
-.round-number {
+.round-number,
+.heading {
     color: #047A04;
     font-size: 30px;
 }
@@ -446,6 +458,22 @@ img.squirrel, img.acorn-big, img.love {
     animation-iteration-count: infinite;
 }
 
+.highscore-list {
+    margin: 0;
+    padding: 0;
+    background: #39FF7E;
+}
+
+.highscore-list li {
+    height: 40px;
+    border: 2px solid #57880D;
+    background: #7EFF7E;
+    color: #054510;
+    font-size: 20px;
+    line-height: 40px;
+    list-style: none;
+}
+
 /* Desktops and laptops ----------- */
 @media only screen and (min-width: 1224px) {
 }
@@ -457,7 +485,8 @@ and (max-device-width: 540px) {
         width: 90%;
     }
 
-    .panel-game {
+    .panel-game,
+    .panel-hall-of-fame {
         width: 100%;
     }
 
@@ -470,5 +499,9 @@ and (max-device-width: 540px) {
     .menu-grid li span {
         left: 5px;
         font-size: 15px;
+    }
+
+    .icon-back:after {
+        content: '';
     }
 }

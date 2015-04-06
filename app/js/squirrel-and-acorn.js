@@ -962,9 +962,19 @@ function() {
         userData = this.loadData();
 
         $(".btn-play").click(function() {
-            $("#panel-main").hide();
-            $("#panel-game").show();
+            $(".panel-main").hide();
+            $(".panel-game").show();
             self.menuGame();
+        });
+
+        $(".btn-hall-of-fame").click(function() {
+            self.showHallOfFame();
+        });
+
+        $(".icon-home").click(function() {
+            $(".panel-game").hide();
+            $(".panel-hall-of-fame").hide();
+            $(".panel-main").show();
         });
 
         $(".icon-menu").click(function() {
@@ -985,6 +995,7 @@ function() {
         var self = this;
         gameState = GAME_STATE_ENUM.MENU;
 
+        $(".icon-home-holder").show();
         $(".icon-menu-holder").hide();
         $(".menu").show();
         $(".board").hide();
@@ -1033,7 +1044,7 @@ function() {
         }
 
         $('html, body').animate({
-            scrollTop: $("#panel-container").offset().top
+            scrollTop: $(".panel-container").offset().top
         }, 'fast');
     };
     this.startGame = function(index) {
@@ -1047,7 +1058,7 @@ function() {
         this.setupGameNode();
 
         $('html, body').animate({
-            scrollTop: $("#panel-container").offset().top
+            scrollTop: $(".panel-container").offset().top
         }, 'fast');
     };
     this.endGame = function() {
@@ -1231,7 +1242,7 @@ function() {
                             swal("Congratulations!", "You are the " + data.rank_text + " one to solve all the puzzles!", "success");
                             userData.inHallOfFame = true;
                             self.saveData(userData);
-                        }).error(function(data) {
+                        }).fail(function() {
                             swal("Oops...", "Something went wrong!", "error");
                         });
                     });
@@ -1244,6 +1255,37 @@ function() {
         });
         $(".letter").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
             $(this).removeClass("shake fadeIn");
+        });
+
+        $('html, body').animate({
+            scrollTop: $(".panel-container").offset().top
+        }, 'fast');
+    };
+    this.showHallOfFame = function() {
+        $(".panel-main").hide();
+        $(".panel-hall-of-fame").show();
+        $(".icon-home").show();
+
+        $(".highscore-list").html("");
+
+        $.get("http://weiseng.redairship.com/leaderboard/api/1/highscore.json?game_id=1", function(data) {
+            console.log(data);
+
+            var numDummyData = 10 - data.length;
+            for (var i = 0; i < numDummyData; i++) {
+                data.push({
+                    username: '----------'
+                });
+            }
+
+            _.each(data, function(highscore, index) {
+                console.log(highscore);
+                setTimeout(function() {
+                    $(".highscore-list").append('<li class="animated slideInUp">' + highscore.username + '</li>');
+                }, index * 200);
+            });
+        }).fail(function() {
+            swal("Oops...", "Something went wrong!", "error");
         });
     };
 
