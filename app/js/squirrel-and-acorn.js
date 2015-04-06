@@ -1278,7 +1278,7 @@ function() {
         return {
             level: 0,
             version: VERSION_NUMBER,
-            inHallOfHame: false
+            inHallOfFame: false
         };
     };
 };
