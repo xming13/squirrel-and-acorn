@@ -1269,8 +1269,6 @@ function() {
         $(".highscore-list").html("");
 
         $.get("http://weiseng.redairship.com/leaderboard/api/1/highscore.json?game_id=1", function(data) {
-            console.log(data);
-
             var numDummyData = 10 - data.length;
             for (var i = 0; i < numDummyData; i++) {
                 data.push({
@@ -1279,7 +1277,6 @@ function() {
             }
 
             _.each(data, function(highscore, index) {
-                console.log(highscore);
                 setTimeout(function() {
                     $(".highscore-list").append('<li class="animated slideInUp">' + highscore.username + '</li>');
                 }, index * 200);
