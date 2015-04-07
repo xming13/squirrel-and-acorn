@@ -1321,3 +1321,7 @@ function() {
         };
     };
 };
+
+$(function () {
+    XMing.GameStateManager.initGame();
+});
