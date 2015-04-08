@@ -1322,6 +1322,6 @@ function() {
     };
 };
 
-$(function () {
+$(function() {
     XMing.GameStateManager.initGame();
 });
