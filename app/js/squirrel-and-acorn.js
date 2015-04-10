@@ -5,8 +5,8 @@ XMing.GameStateManager = new
 function() {
     var windowWidth = 0;
     var gameState;
-    var roundNumber = 0;
     var userData;
+    var roundNumber = 0;
     var nodes = [];
     var injectedStyleDiv;
 
@@ -926,8 +926,14 @@ function() {
     this.preloadImage = function() {
         var imgLove = new Image();
         imgLove.src = "images/love.png";
+
+        var imgOrangeEgg = new Image();
+        imgOrangeEgg.src = "images/orange-egg.png";
+
+        var imgBlueEgg = new Image();
+        imgBlueEgg.src = "images/blue-egg.png";
     };
-    this.onResize = function(event) {
+    this.onResize = function() {
         if ($(window).width() != windowWidth) {
             windowWidth = $(window).width();
 
@@ -969,6 +975,10 @@ function() {
 
         userData = this.loadData();
 
+        swal.setDefaults({
+            confirmButtonColor: '#6EFD3D'
+        });
+
         $(".btn-play").click(function() {
             $(".panel-main").hide();
             $(".panel-game").show();
@@ -998,6 +1008,8 @@ function() {
                 self.menuGame();
             }
         });
+
+        this.checkPlayedEasterEgg();
     };
     this.menuGame = function() {
         var self = this;
@@ -1276,6 +1288,12 @@ function() {
 
         $(".highscore-list").html("");
 
+        if (!userData.leaderboard.squirrel) {
+            userData.leaderboard.squirrel = true;
+            self.saveData(userData);
+            self.checkLeaderboardEasterEgg();
+        }
+
         $.get("http://weiseng.redairship.com/leaderboard/api/1/highscore.json?game_id=1", function(data) {
             var numDummyData = 10 - data.length;
             for (var i = 0; i < numDummyData; i++) {
@@ -1305,6 +1323,34 @@ function() {
         return gameState == GAME_STATE_ENUM.END;
     };
 
+    // Easter Egg
+    this.checkPlayedEasterEgg = function() {
+        if (!userData.easterEgg.allPlayed) {
+            if (_.every(userData.played)) {
+                userData.easterEgg.allPlayed = true;
+                this.saveData(userData);
+                swal({
+                    title: 'Congratulations!',
+                    text: 'You have found the Blue Egg!',
+                    imageUrl: 'images/blue-egg.png'
+                });
+            }
+        }
+    };
+    this.checkLeaderboardEasterEgg = function() {
+        if (!userData.easterEgg.allLeaderboard) {
+            if (_.every(userData.leaderboard)) {
+                userData.easterEgg.allLeaderboard = true;
+                this.saveData(userData);
+                swal({
+                    title: 'Congratulations!',
+                    text: 'You have found the Ninja Egg!',
+                    imageUrl: 'images/ninja-egg.png'
+                });
+            }
+        }
+    };
+
     // Local storage
     this.saveData = function(userData) {
         if (window.localStorage) {
@@ -1323,9 +1369,36 @@ function() {
             }
         }
         var data = {
+            played: {
+                bunny: false,
+                star: false,
+                specialOne: false,
+                mushrooms: false,
+                word: false,
+                numbers: false,
+                squirrel: false
+            },
+            leaderboard: {
+                bunny: false,
+                star: false,
+                specialOne: false,
+                mushrooms: false,
+                word: false,
+                numbers: false,
+                squirrel: false
+            },
             squirrel: {
                 level: 0,
                 inHallOfFame: false
+            },
+            easterEgg: {
+                allGames: false,
+                allLeaderboard: false,
+                findTheWord: false,
+                followTheNumbers: false,
+                spotTheSpecialOne: false,
+                mushrooms: false,
+                squirrel: false
             },
             version: VERSION_NUMBER
         };
