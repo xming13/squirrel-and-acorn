@@ -934,11 +934,11 @@ function() {
         var imgLove = new Image();
         imgLove.src = "images/love.png";
 
-        var imgOrangeEgg = new Image();
-        imgOrangeEgg.src = "images/orange-egg.png";
-
         var imgBlueEgg = new Image();
         imgBlueEgg.src = "images/blue-egg.png";
+
+        var imgNinjaEgg = new Image();
+        imgNinjaEgg.src = "images/ninja-egg.png";
     };
     this.onResize = function() {
         if ($(window).width() != windowWidth) {
