@@ -9,6 +9,7 @@ function() {
     var userData;
     var nodes = [];
     var injectedStyleDiv;
+
     var VERSION_NUMBER = 1;
     var GAME_STATE_ENUM = {
         INITIAL: "initial",
@@ -886,9 +887,9 @@ function() {
                     rotate: '+=90deg'
                 });
                 if (self.checkPath()) {
-                    if (userData.level === roundNumber) {
+                    if (userData.squirrel.level === roundNumber) {
                         // unlock the next level!
-                        userData.level++;
+                        userData.squirrel.level++;
                         self.saveData(userData);
                     }
 
@@ -911,6 +912,13 @@ function() {
                         })
                     }, 300);
                 }
+            });
+
+            $("ul.board-grid li.node-fixed").click(function() {
+                $(this).addClass("animated shake");
+                $(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                    $(this).removeClass("shake fadeIn");
+                });
             });
         }
     };
@@ -1011,7 +1019,7 @@ function() {
             var $li = $("<li>");
             if (i <= nodeArray.length - 1) {
                 // level is locked
-                if (i > userData.level) {
+                if (i > userData.squirrel.level) {
                     $li.addClass('locked');
                 } else {
                     if (i === userData.level) {
@@ -1028,7 +1036,7 @@ function() {
                 }
             } else if (i === nodeArray.length) {
                 // level is locked
-                if (i > userData.level) {
+                if (i > userData.squirrel.level) {
                     $li.addClass('locked');
                 } else {
                     $li.html('<img src="images/love.png" style="width:80%; height:80%; margin: 10%;" class="animated tada love"/>');
@@ -1215,7 +1223,7 @@ function() {
                     title: "8512",
                     text: "The number of different paths for the squirrel to move from top left to bottom right without visiting the same square twice!",
                     imageUrl: "images/main_squirrel.png",
-                    closeOnConfirm: userData.inHallOfFame
+                    closeOnConfirm: userData.squirrel.inHallOfFame
                 }, function() {
                     swal({
                         title: "Thanks for playing!!!",
@@ -1240,7 +1248,7 @@ function() {
                             })
                         }).success(function(data) {
                             swal("Congratulations!", "You are the " + data.rank_text + " one to solve all the puzzles!", "success");
-                            userData.inHallOfFame = true;
+                            userData.squirrel.inHallOfFame = true;
                             self.saveData(userData);
                         }).fail(function() {
                             swal("Oops...", "Something went wrong!", "error");
@@ -1314,11 +1322,17 @@ function() {
                 }
             }
         }
-        return {
-            level: 0,
-            version: VERSION_NUMBER,
-            inHallOfFame: false
+        var data = {
+            squirrel: {
+                level: 0,
+                inHallOfFame: false
+            },
+            version: VERSION_NUMBER
         };
+
+        this.saveData(data);
+
+        return data;
     };
 };
 
