@@ -890,6 +890,13 @@ function() {
                     if (userData.squirrel.level === roundNumber) {
                         // unlock the next level!
                         userData.squirrel.level++;
+
+                        // we consider user has played the game
+                        // if level 4 is cleared
+                        if (!userData.played.squirrel && roundNumber === 4) {
+                            userData.played.squirrel = true;
+                        }
+
                         self.saveData(userData);
                     }
 
