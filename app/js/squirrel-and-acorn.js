@@ -934,6 +934,9 @@ function() {
         var imgLove = new Image();
         imgLove.src = "images/love.png";
 
+        var imgGreenEgg = new Image();
+        imgGreenEgg.src = "images/green-egg.png";
+
         var imgBlueEgg = new Image();
         imgBlueEgg.src = "images/blue-egg.png";
 
