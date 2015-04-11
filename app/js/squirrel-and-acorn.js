@@ -1318,6 +1318,7 @@ function() {
         $(".panel-main").hide();
         $(".panel-hall-of-fame").show();
         $(".icon-home").show();
+        $(".loader").show();
 
         $(".highscore-list").html("");
 
@@ -1328,6 +1329,8 @@ function() {
         }
 
         $.get("http://weiseng.redairship.com/leaderboard/api/1/highscore.json?game_id=1", function(data) {
+            $(".loader").fadeOut(700);
+
             var numDummyData = 10 - data.length;
             for (var i = 0; i < numDummyData; i++) {
                 data.push({
