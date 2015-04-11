@@ -1401,7 +1401,6 @@ function() {
         var data = {
             played: {
                 bunny: false,
-                star: false,
                 specialOne: false,
                 mushrooms: false,
                 word: false,
@@ -1410,7 +1409,6 @@ function() {
             },
             leaderboard: {
                 bunny: false,
-                star: false,
                 specialOne: false,
                 mushrooms: false,
                 word: false,
