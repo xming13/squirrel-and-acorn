@@ -986,6 +986,22 @@ function() {
             confirmButtonColor: '#6EFD3D'
         });
 
+        $(".icon-calculator").click(function(e) {
+            if (!userData.easterEgg.squirrel) {
+                var that = this;
+                e.preventDefault();
+                userData.easterEgg.squirrel = true;
+                self.saveData(userData);
+                swal({
+                    title: "Congratulations!",
+                    text: "You have found the Green Egg!",
+                    imageUrl: "images/green-egg.png"
+                }, function() {
+                    window.open(that.href, '_blank');
+                });
+            }
+        });
+
         $(".btn-play").click(function() {
             $(".panel-main").hide();
             $(".panel-game").show();
@@ -1006,6 +1022,7 @@ function() {
             if (roundNumber < nodeArray.length) {
                 swal({
                     title: "Are you sure?",
+                    text: "Progress for this round will not be saved!",
                     type: "warning",
                     showCancelButton: true
                 }, function() {
@@ -1244,6 +1261,7 @@ function() {
                     imageUrl: "images/main_squirrel.png",
                     closeOnConfirm: userData.squirrel.inHallOfFame
                 }, function() {
+                    var postingInProgress = false;
                     swal({
                         title: "Thanks for playing!!!",
                         imageUrl: "images/love.png",
@@ -1251,27 +1269,32 @@ function() {
                         text: "Write your name here! It will appear in the Hall of Fame!",
                         closeOnConfirm: false
                     }, function(playerName) {
-                        if (playerName === "") {
+                        if (playerName == "") {
                             swal.showInputError("You need to write something! A nickname is fine too!");
                             return false;
                         }
 
-                        $.ajax({
-                            method: "POST",
-                            url: 'http://weiseng.redairship.com/leaderboard/api/1/highscore.json',
-                            contentType: "application/json",
-                            data: JSON.stringify({
-                                game_id: 1,
-                                username: playerName,
-                                score: roundNumber
-                            })
-                        }).success(function(data) {
-                            swal("Congratulations!", "You are the " + data.rank_text + " one to solve all the puzzles!", "success");
-                            userData.squirrel.inHallOfFame = true;
-                            self.saveData(userData);
-                        }).fail(function() {
-                            swal("Oops...", "Something went wrong!", "error");
-                        });
+                        if (postingInProgress) {
+                            return false;
+                        } else {
+                            postingInProgress = true;
+                            $.ajax({
+                                method: "POST",
+                                url: 'http://weiseng.redairship.com/leaderboard/api/1/highscore.json',
+                                contentType: "application/json",
+                                data: JSON.stringify({
+                                    game_id: 1,
+                                    username: playerName,
+                                    score: roundNumber
+                                })
+                            }).success(function(data) {
+                                swal("Congratulations!", "You are the " + data.rank_text + " one to solve all the puzzles!", "success");
+                                userData.squirrel.inHallOfFame = true;
+                                self.saveData(userData);
+                            }).fail(function() {
+                                swal("Oops...", "Something went wrong!", "error");
+                            });
+                        }
                     });
                 });
             }
