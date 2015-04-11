@@ -1320,8 +1320,8 @@ function() {
 
         if (!userData.leaderboard.squirrel) {
             userData.leaderboard.squirrel = true;
-            self.saveData(userData);
-            self.checkLeaderboardEasterEgg();
+            this.saveData(userData);
+            this.checkLeaderboardEasterEgg();
         }
 
         $.get("http://weiseng.redairship.com/leaderboard/api/1/highscore.json?game_id=1", function(data) {
