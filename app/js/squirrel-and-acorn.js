@@ -820,8 +820,8 @@ function() {
                 var img;
                 if (i == 24) {
                     img = $("<img>", {
-                        src: "images/acorn_big.png",
-                        class: "acorn acorn-big animated rubberBand"
+                        src: "images/acorn-big.png",
+                        class: "acorn infinite animated rubberBand"
                     });
                     li.append(img);
                 } else {
@@ -852,7 +852,7 @@ function() {
                     if (i == 0) {
                         var imgSquirrel = $("<img>", {
                             src: "images/squirrel.png",
-                            class: "squirrel animated bounce"
+                            class: "infinite animated bounce"
                         });
                         li.append(imgSquirrel);
                     }
@@ -902,7 +902,7 @@ function() {
 
                     _.delay(function() {
                         swal({
-                            title: "Congrats!",
+                            title: "Congratulations!",
                             text: "Go to the next stage!",
                             type: "success",
                             confirmButtonText: "Next",
@@ -1062,9 +1062,9 @@ function() {
                     $li.addClass('locked');
                 } else {
                     if (i === userData.level) {
-                        $li.html('<img src="images/acorn.png" class="acorn-big animated tada"/><span>' + (i + 1) + '</span>');
+                        $li.html('<img src="images/acorn.png" class="infinite animated tada"/><span>' + (i + 1) + '</span>');
                     } else {
-                        $li.html('<img src="images/acorn.png" class="acorn-big"/><span>' + (i + 1) + '</span>');
+                        $li.html('<img src="images/acorn.png" class="infinite"/><span>' + (i + 1) + '</span>');
                     }
 
                     (function clickHandler(index) {
@@ -1078,7 +1078,7 @@ function() {
                 if (i > userData.squirrel.level) {
                     $li.addClass('locked');
                 } else {
-                    $li.html('<img src="images/love.png" style="width:80%; height:80%; margin: 10%;" class="animated tada love"/>');
+                    $li.html('<img src="images/acorn-big.png" class="infinite animated tada"/>');
                     $li.click(function() {
                         self.endGame();
                     });
@@ -1114,7 +1114,7 @@ function() {
 
         roundNumber = nodeArray.length;
 
-        $(".round-number").html("Bonus");
+        $(".round-number").html("Last Round");
         $(".icon-menu-holder").show();
         $(".menu").hide();
         $(".board").show();
@@ -1185,8 +1185,8 @@ function() {
             // last node - assign Big Acorn
             if (i == 24) {
                 img = $("<img>", {
-                    src: "images/acorn_big.png",
-                    class: "acorn acorn-big animated rubberBand"
+                    src: "images/acorn-big.png",
+                    class: "acorn infinite animated rubberBand"
                 });
                 li.append(img);
             } else {
@@ -1232,7 +1232,7 @@ function() {
                     if (i == 0) {
                         var imgSquirrel = $("<img>", {
                             src: "images/squirrel.png",
-                            class: "squirrel animated bounce"
+                            class: "infinite animated bounce"
                         });
                         li.append(imgSquirrel);
                     }
@@ -1261,7 +1261,7 @@ function() {
                 swal({
                     title: "8512",
                     text: "The number of different paths for the squirrel to move from top left to bottom right without visiting the same square twice!",
-                    imageUrl: "images/main_squirrel.png",
+                    imageUrl: "images/main-squirrel.png",
                     closeOnConfirm: userData.squirrel.inHallOfFame
                 }, function() {
                     var postingInProgress = false;
