@@ -311,7 +311,7 @@ function() {
         }],
         disabledNodes: [11, 13]
     }, {
-        acornNodes: [5, 7, 9, 10, 12, 13, 15, 17, 19],
+        acornNodes: [5, 7, 9, 10, 12, 14, 15, 17, 19],
         directionNodes: [{
             index: 0,
             direction: 2,
@@ -327,7 +327,7 @@ function() {
         }, {
             index: 9,
             direction: 3,
-            isFixed: true
+            isFixed: false
         }, {
             index: 10,
             direction: 1,
@@ -347,13 +347,117 @@ function() {
         }, {
             index: 19,
             direction: 3,
-            isFixed: true
+            isFixed: false
         }, {
             index: 23,
             direction: 2,
             isFixed: false
         }],
         disabledNodes: []
+    }, {
+        acornNodes: [4, 12, 20],
+        directionNodes: [{
+            index: 0,
+            direction: 1,
+            isFixed: false
+        }, {
+            index: 1,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 2,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 3,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 4,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 5,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 6,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 7,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 8,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 9,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 10,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 11,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 12,
+            direction: 0,
+            isFixed: true
+        }, {
+            index: 13,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 14,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 15,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 16,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 17,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 18,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 19,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 20,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 21,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 22,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 23,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 24,
+            direction: 0,
+            isFixed: false
+        }],
+        disabledNodes: [5, 8, 16, 19]
     }, {
         acornNodes: [1, 6, 11, 17, 18, 19],
         directionNodes: [{
@@ -424,6 +528,318 @@ function() {
             index: 23,
             direction: 1,
             isFixed: true
+        }],
+        disabledNodes: []
+    }, {
+        acornNodes: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
+        directionNodes: [{
+            index: 0,
+            direction: 1,
+            isFixed: false
+        }, {
+            index: 1,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 2,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 3,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 4,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 5,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 6,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 7,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 8,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 9,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 10,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 11,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 12,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 13,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 14,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 15,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 16,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 17,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 18,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 19,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 20,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 21,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 22,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 23,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 24,
+            direction: 0,
+            isFixed: false
+        }],
+        disabledNodes: []
+    }, {
+        acornNodes: [2, 4, 10, 12, 14, 20, 22],
+        directionNodes: [{
+            index: 0,
+            direction: 1,
+            isFixed: false
+        }, {
+            index: 1,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 2,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 3,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 4,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 5,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 6,
+            direction: 0,
+            isFixed: true
+        }, {
+            index: 7,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 8,
+            direction: 3,
+            isFixed: true
+        }, {
+            index: 9,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 10,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 11,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 12,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 13,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 14,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 15,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 16,
+            direction: 3,
+            isFixed: true
+        }, {
+            index: 17,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 18,
+            direction: 0,
+            isFixed: true
+        }, {
+            index: 19,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 20,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 21,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 22,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 23,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 24,
+            direction: 0,
+            isFixed: false
+        }],
+        disabledNodes: []
+    }, {
+        acornNodes: [4, 12, 20],
+        directionNodes: [{
+            index: 0,
+            direction: 1,
+            isFixed: false
+        }, {
+            index: 1,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 2,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 3,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 4,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 5,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 6,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 7,
+            direction: 2,
+            isFixed: true
+        }, {
+            index: 8,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 9,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 10,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 11,
+            direction: 0,
+            isFixed: true
+        }, {
+            index: 12,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 13,
+            direction: 1,
+            isFixed: true
+        }, {
+            index: 14,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 15,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 16,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 17,
+            direction: 3,
+            isFixed: true
+        }, {
+            index: 18,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 19,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 20,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 21,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 22,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 23,
+            direction: 0,
+            isFixed: false
+        }, {
+            index: 24,
+            direction: 0,
+            isFixed: false
         }],
         disabledNodes: []
     }, {
@@ -1071,7 +1487,7 @@ function() {
                 if (i > userData.squirrel.level) {
                     $li.addClass('locked');
                 } else {
-                    if (i === userData.level) {
+                    if (i === userData.squirrel.level) {
                         $li.html('<img src="images/acorn.png" class="infinite animated tada"/><span>' + (i + 1) + '</span>');
                     } else {
                         $li.html('<img src="images/acorn.png" class="infinite"/><span>' + (i + 1) + '</span>');
@@ -1094,7 +1510,19 @@ function() {
                     });
                 }
             } else {
-                $li.addClass('disabled');
+                if (i === nodeArray.length + 1 && i - 1 === userData.squirrel.level) {
+                    $li.html('<img src="images/squirrel.png" class="infinite animated bounce"/>');
+                    $li.click(function() {
+                        swal({
+                            title: "Fun Fact",
+                            text: "There are <b>8512</b> different paths for the squirrel to move from top left to bottom right!",
+                            imageUrl: "images/main-squirrel.png",
+                            html: true
+                        });
+                    });
+                } else {
+                    $li.addClass('disabled');
+                }
             }
 
             $(".menu-grid").append($li);
@@ -1269,9 +1697,9 @@ function() {
             });
             if (self.checkPath()) {
                 swal({
-                    title: "8512",
-                    text: "The number of different paths for the squirrel to move from top left to bottom right without visiting the same square twice!",
-                    imageUrl: "images/main-squirrel.png",
+                    title: "Congratulations!",
+                    text: "You have completed all the levels!",
+                    imageUrl: "images/acorn-big.png",
                     closeOnConfirm: userData.squirrel.inHallOfFame
                 }, function() {
                     var postingInProgress = false;

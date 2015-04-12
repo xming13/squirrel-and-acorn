@@ -330,7 +330,7 @@ a {
     color: #098109;
 }
 
-.board-grid li:hover {
+.grid li:not(.disabled):hover {
     background-color: #fff;
     color: #00FF00;
 }
