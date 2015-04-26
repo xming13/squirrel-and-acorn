@@ -1731,12 +1731,14 @@ function() {
                             }).success(function(data) {
                                 swal("Congratulations!", "You are the " + data.rank_text + " one to solve all the puzzles!", "success");
                                 userData.squirrel.inHallOfFame = true;
+                                userData.username = playerName;
                                 self.saveData(userData);
                             }).fail(function() {
                                 swal("Oops...", "Something went wrong!", "error");
                             });
                         }
                     });
+                    $('.sweet-alert input[type=text]:first').val(userData.username);
                 });
             }
         });
@@ -1901,6 +1903,7 @@ function() {
             },
             collectAll: false,
             uid: uid,
+            username: '',
             version: VERSION_NUMBER
         };
 
