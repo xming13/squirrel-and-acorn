@@ -21,13 +21,59 @@
     clear: both;
 }
 
-body, html {
-    font-size: 100%;
+/* Main */
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+}
+.xming-games {
+    width: auto;
+    background: transparent;
+    border: none;
     padding: 0;
     margin: 0;
 }
+.wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -85px;
+}
 
-/* Main */
+.nav-bar {
+    position: relative;
+    min-height: 50px;
+    background: rgba(0,0,0,0.2);
+}
+
+.logo {
+    float: left;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+}
+
+.game-name {
+    line-height: 50px;
+    font-size: 24px;
+    padding-left: 10px;
+    float: left;
+}
+
+footer {
+    height: 85px;
+    padding: 20px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.8);
+    color: #777;
+    overflow: hidden;
+}
 .fb-like {
     margin: 10px 0;
     float: left;
@@ -38,7 +84,6 @@ body {
     color: #fff;
     padding: 0;
     margin: 0 auto;
-    font-family: 'Lato', Calibri, Arial, sans-serif;
 }
 
 a {
@@ -148,7 +193,6 @@ nav a:hover:before {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    margin: 0 auto 30px;
 }
 
 .panel-container {
