@@ -1,5 +1,6 @@
 /*General Demo Style*/
 /*@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);*/
+
 /* Reset */
 *,
 *:after,
@@ -662,7 +663,10 @@ nav a:hover:before {
 }
 
 /* Desktops and laptops ----------- */
-@media (min-device-width: 320px) and (max-device-width: 540px) {
+@media only screen and (min-width: 1224px) {
+}
+
+@media(min-device-width: 320px) and (max-device-width: 540px) {
     .wrap {
         margin: 0 auto -40px;
     }
@@ -700,5 +704,3 @@ nav a:hover:before {
         content: '';
     }
 }
-
-/*# sourceMappingURL=squirrel-and-acorn.css.map */
