@@ -20,8 +20,7 @@
     <meta property="og:url" content="http://xming13.github.io/squirrel-and-acorn/"/>
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link rel="stylesheet" type="text/css"
-        href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//xming13.github.io/games/css/xming-games.min.css"/>
 
     <!-- build:css css/app.css -->
@@ -195,12 +194,13 @@
 </div>
 <footer>
   <div class="fb-like" data-url="http://xming13.github.io/squirrel-and-acorn" data-action="like" data-show-faces="false" data-share="true"></div>
+  <div class="overlay"></div>
   <div class="game-list">
-      <ul class="mfb-component--br mfb-slidein-spring" data-mfb-toggle="click" data-mfb-state="closed">
+      <ul class="mfb-component--br mfb-slidein-spring" data-mfb-toggle="hover" data-mfb-state="closed">
         <li class="mfb-component__wrap">
           <a data-mfb-label="Games" class="mfb-component__button--main">
-            <i class="mfb-component__main-icon--resting icon-game"></i>
-            <i class="mfb-component__main-icon--active icon-game"></i>
+            <i class="mfb-component__main-icon--resting icon-game fa fa-gamepad"></i>
+            <i class="mfb-component__main-icon--active icon-game fa fa-close"></i>
           </a>
           <ul class="mfb-component__list">
             <li>
@@ -239,6 +239,7 @@
   </div>
 </footer>
 <!-- build:js js/app.js -->
+<script src="../node_modules/mfb/src/lib/modernizr.touch.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/underscore/underscore-min.js"></script>
 <script src="../node_modules/jquery.transit/jquery.transit.js"></script>

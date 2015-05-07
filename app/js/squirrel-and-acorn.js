@@ -1405,6 +1405,14 @@ function() {
             confirmButtonColor: '#6EFD3D'
         });
 
+        $(".mfb-component__button--main").click(function() {
+            if ($(this).parent().parent().attr('data-mfb-state') === "open") {
+                $(".overlay").addClass("active");
+            } else {
+                $(".overlay").removeClass("active");
+            }
+        });
+
         $(".icon-calculator").click(function(e) {
             if (!userData.easterEgg.squirrel) {
                 var that = this;
