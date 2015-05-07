@@ -20,10 +20,11 @@
     <meta property="og:url" content="http://xming13.github.io/squirrel-and-acorn/"/>
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" type="text/css"
-          href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css"/>
+        href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="//xming13.github.io/games/css/xming-games.min.css"/>
+
+    <link rel="stylesheet" href="css/app.css">
 
     <link rel="manifest" href="manifest.json">
     <script>
@@ -57,27 +58,18 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div id="container">
-    <header class="clearfix">
-        <h1>Squirrel and Acorn</h1>
-
-        <div class="fb-like" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
-
-        <nav>
-          <a href="http://xming13.github.io/squirrel-and-acorn" class="icon-home" data-info="Home">
-              Home
-          </a>
-          <a href="http://github.com/xming13/squirrel-and-acorn/" target="_blank" class="icon-github" data-info="Github">
-              Github
-          </a>
-          <a href="http://xming13.github.io/self-avoiding-walk/" target="_blank" class="icon-calculator" data-info="Calculator">
-              Calculator
-          </a>
-          <a href="http://xming13.github.io/games/" class="icon-games" data-info="Games">
-              Games
-          </a>
-        </nav>
-    </header>
+<div class="wrap">
+  <div class="nav-bar">
+    <div class="navbar-brand">
+      <div class="logo">
+        <img src="images/main-squirrel.png"/>
+      </div>
+      <div class="game-name">
+        Squirrel and Acorn
+      </div>
+    </div>
+  </div>
+  <div id="container">
     <div class="main-content">
         <div class="panel-container" name="panel-container">
             <div class="panel-main">
@@ -194,9 +186,12 @@
             </div>
         </div>
     </div>
-    <div class="xming-games clearfix"></div>
 </div>
-
+</div>
+<footer>
+  <div class="fb-like" data-url="http://xming13.github.io/squirrel-and-acorn" data-action="like" data-show-faces="false" data-share="true"></div>
+  <div class="xming-games clearfix"></div>
+</footer>
 <script src="js/app.js"></script>
 <script src="http://xming13.github.io/games/js/xming-games.min.js"></script>
 </body>
