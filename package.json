@@ -23,5 +23,8 @@
     "jquery.transit": "^0.9.12",
     "sweetalert": "^1.0.0-beta",
     "underscore": "^1.8.3"
+  },
+  "dependencies": {
+    "mfb": "^0.12.0"
   }
 }

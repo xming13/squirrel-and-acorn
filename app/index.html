@@ -27,6 +27,7 @@
     <!-- build:css css/app.css -->
     <link rel="stylesheet" type="text/css" href="../node_modules/animate.css/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/dist/sweetalert.css"/>
+    <link rel="stylesheet" type="text/css" href="../node_modules/mfb/src/mfb.css"/>
     <link rel="stylesheet" type="text/css" href="css/squirrel-and-acorn.css"/>
     <!-- endbuild -->
 
@@ -194,7 +195,48 @@
 </div>
 <footer>
   <div class="fb-like" data-url="http://xming13.github.io/squirrel-and-acorn" data-action="like" data-show-faces="false" data-share="true"></div>
-  <div class="xming-games clearfix"></div>
+  <div class="game-list">
+      <ul class="mfb-component--br mfb-slidein-spring" data-mfb-toggle="click" data-mfb-state="closed">
+        <li class="mfb-component__wrap">
+          <a data-mfb-label="Games" class="mfb-component__button--main">
+            <i class="mfb-component__main-icon--resting icon-game"></i>
+            <i class="mfb-component__main-icon--active icon-game"></i>
+          </a>
+          <ul class="mfb-component__list">
+            <li>
+              <a href="http://xming13.github.io/find-the-word/" data-mfb-label="Find The Word" class="mfb-component__button--child">
+                <i class="mfb-component__child-icon icon-find-the-word icon-game"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://xming13.github.io/easter-bunnies/" data-mfb-label="Easter Bunnies" class="mfb-component__button--child">
+                <i class="mfb-component__child-icon icon-easter-bunnies icon-game"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://xming13.github.io/squirrel-and-acorn/" data-mfb-label="Squirrel And Acorn" class="mfb-component__button--child">
+                <i class="mfb-component__child-icon icon-squirrel-and-acorn icon-game"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://xming13.github.io/spot-the-special-one/" data-mfb-label="Spot The Special One" class="mfb-component__button--child">
+                <i class="mfb-component__child-icon icon-spot-the-special-one icon-game"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://xming13.github.io/spot-the-special-one/" data-mfb-label="Spot The Special One" class="mfb-component__button--child">
+                <i class="mfb-component__child-icon icon-spot-the-special-one icon-game"></i>
+              </a>
+            </li>
+            <li>
+              <a href="http://xming13.github.io/follow-the-numbers/" data-mfb-label="Follow the numbers" class="mfb-component__button--child">
+                <i class="mfb-component__child-icon icon-follow-the-numbers icon-game"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+  </div>
 </footer>
 <!-- build:js js/app.js -->
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -202,6 +244,7 @@
 <script src="../node_modules/jquery.transit/jquery.transit.js"></script>
 <script src="../node_modules/fastclick/lib/fastclick.js"></script>
 <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../node_modules/mfb/src/mfb.js"></script>
 <script src="js/squirrel-and-acorn.js"></script>
 <!-- endbuild -->
 <script src="http://xming13.github.io/games/js/xming-games.min.js"></script>
