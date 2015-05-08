@@ -1364,6 +1364,7 @@ function() {
             windowWidth = $(window).width();
 
             if (injectedStyleDiv) {
+                // undo custom style first so that we can get the original width based on percentage
                 injectedStyleDiv.html("");
             }
 
@@ -1371,12 +1372,13 @@ function() {
             var liMaxWidth = _.max(lis, function(li) {
                 return $(li).width();
             });
-            var maxWidth = $(liMaxWidth).width();
+
+            // +2px for the li border
+            var liWidth = $(liMaxWidth).width() + 2;
 
             var styles = "<style>"
-                // +2px for the border
-                + " ul.grid { width: " + (maxWidth * 5 + 2) + "px; } " + " .grid li { height: " + maxWidth + "px; width: " + maxWidth + "px; } " + " .grid li .content { font-size: " + (maxWidth * 0.5) + "px; } " + " .game-letters span { font-size: " + (maxWidth * 0.2) + "px; margin-left: " + (maxWidth * 0.1) + "px; } " + "</style>";
-
+                // +2px for the ul border
+                + "ul.grid { width: " + (liWidth * 5 + 2) + "px; }" + ".grid li { width: " + liWidth + "px; height: " + liWidth + "px; }" + ".grid li .content { font-size: " + (liWidth / 2) + "px; }" + ".grid li span { font-size: " + (liWidth * 0.3) + "px; left: " + (liWidth * 0.1) + "px; }" + "</style>";
             if (injectedStyleDiv) {
                 injectedStyleDiv.html(styles);
             } else {

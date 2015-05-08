@@ -204,7 +204,7 @@ nav a:hover:before {
 }
 
 .panel-container {
-    padding: 5% 5%;
+    padding: 2%;
     text-align: center;
 }
 
@@ -262,7 +262,7 @@ nav a:hover:before {
 .panel-game,
 .panel-hall-of-fame {
     position: relative;
-    width: 63%;
+    width: 50%;
     margin: 0 auto;
     min-height: 327px;
 }
@@ -599,7 +599,8 @@ nav a:hover:before {
 
 /* Material floating button customisation */
 .mfb-component, .mfb-component--tl, .mfb-component--tr, .mfb-component--bl, .mfb-component--br {
-    margin: 10px;
+    height: 56px;
+    margin: 12px;
 }
 
 .mfb-component--br.mfb-slidein-spring[data-mfb-toggle="hover"]:hover .mfb-component__list li:nth-child(5),
@@ -662,7 +663,7 @@ nav a:hover:before {
 }
 
 /* Desktops and laptops ----------- */
-@media (min-device-width: 320px) and (max-device-width: 540px) {
+@media (min-width: 320px) and (max-width: 540px) {
     .wrap {
         margin: 0 auto -40px;
     }
