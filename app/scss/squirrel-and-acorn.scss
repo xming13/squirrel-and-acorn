@@ -43,16 +43,6 @@ a {
     outline: none;
 }
 
-#container {
-    width: 70%;
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
 .main-content {
     background: #70FF00;
     -webkit-border-radius: 10px;
@@ -455,13 +445,8 @@ a {
 }
 
 @media(min-width: 320px) and (max-width: 540px) {
-    #container {
-        width: 90%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
+    .main-content {
+        margin: 0;
     }
 
     .panel-game,
@@ -482,5 +467,9 @@ a {
 
     .icon-back:after {
         content: '';
+    }
+
+    .highscore-list {
+        min-height: 360px;
     }
 }

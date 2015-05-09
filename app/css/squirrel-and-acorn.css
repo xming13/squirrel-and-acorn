@@ -36,15 +36,6 @@ a {
   text-decoration: none;
   outline: none; }
 
-#container {
-  width: 70%;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); }
-
 .main-content {
   background: #70FF00;
   -webkit-border-radius: 10px;
@@ -372,13 +363,8 @@ a {
   87.5% {
     box-shadow: 0em -3em 0em 0em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 0em #ffffff, -2em -2em 0 0.2em #ffffff; } }
 @media (min-width: 320px) and (max-width: 540px) {
-  #container {
-    width: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); }
+  .main-content {
+    margin: 0; }
 
   .panel-game,
   .panel-hall-of-fame {
@@ -394,6 +380,9 @@ a {
     font-size: 15px; }
 
   .icon-back:after {
-    content: ''; } }
+    content: ''; }
+
+  .highscore-list {
+    min-height: 360px; } }
 
 /*# sourceMappingURL=squirrel-and-acorn.css.map */

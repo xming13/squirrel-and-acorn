@@ -20,7 +20,7 @@
     <meta property="og:url" content="http://xming13.github.io/squirrel-and-acorn/"/>
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="//games/css/ming-games.min.css"/>
 
     <link rel="stylesheet" href="css/app.css">
@@ -53,7 +53,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=542865139076593";
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -61,7 +61,7 @@
   <div class="nav-bar">
     <div class="navbar-brand">
       <div class="logo">
-        <img src="images/main-squirrel.png"/>
+        <a href="."><img src="images/main-squirrel.png"/></a>
       </div>
       <div class="game-name">
         Squirrel and Acorn
@@ -185,10 +185,11 @@
             </div>
         </div>
     </div>
-</div>
+  </div>
 </div>
 <footer>
-  <div class="fb-like" data-url="http://xming13.github.io/squirrel-and-acorn" data-action="like" data-show-faces="false" data-share="true"></div>
+  <div class="fb-like" data-url="http://xming13.github.io/squirrel-and-acorn" data-layout="standard"
+       data-action="like" data-show-faces="true" data-share="true" width="200"></div>
   <div class="overlay"></div>
   <div class="game-list">
       <ul class="mfb-component--br mfb-slidein" data-mfb-toggle="hover" data-mfb-state="closed">
