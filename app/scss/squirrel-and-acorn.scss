@@ -444,6 +444,11 @@ a {
     }
 }
 
+.fb-like{
+    height: 20px;
+    overflow: hidden !important;
+}
+
 @media(min-width: 320px) and (max-width: 540px) {
     .main-content {
         margin: 0;
