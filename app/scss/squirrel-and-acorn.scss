@@ -1,5 +1,4 @@
-/*General Demo Style*/
-/*@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);*/
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 /* Reset */
 *,
@@ -159,10 +158,11 @@ a {
 .icon-back:after {
     content: attr(data-info);
     position: absolute;
-    top: 5px;
-    left: 40px;
+    top: -22px;
+    left: 0px;
     width: 95px;
-    text-align: right;
+    text-align: left;
+    font-size: 14px;
     font-weight: bold;
     color: #009400;
     opacity: 0;
@@ -452,10 +452,6 @@ a {
 
 /* Mobile Phones Portrait or Landscape */
 @media screen and (max-device-width: 640px) {
-    .main-content {
-        margin: 0;
-    }
-
     .subtitle {
         margin: 0;
     }
