@@ -476,5 +476,10 @@ a {
 
     .highscore-list {
         min-height: 360px;
+
+        li {
+            height: 36px;
+            line-height: 36px;
+        }
     }
 }

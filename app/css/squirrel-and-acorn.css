@@ -387,6 +387,9 @@ a {
     content: ''; }
 
   .highscore-list {
-    min-height: 360px; } }
+    min-height: 360px; }
+    .highscore-list li {
+      height: 36px;
+      line-height: 36px; } }
 
 /*# sourceMappingURL=squirrel-and-acorn.css.map */
