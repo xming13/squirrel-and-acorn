@@ -1407,11 +1407,6 @@ function() {
             confirmButtonColor: '#6EFD3D'
         });
 
-        // Mobile Phones Portrait or Landscape
-        if (window.matchMedia("(max-device-width: 640px)").matches) {
-            window.scrollTo(0, 1);
-        }
-
         $(".mfb-component__button--main").click(function() {
             if ($(this).parent().parent().attr('data-mfb-state') === "open") {
                 $(".overlay").addClass("active");

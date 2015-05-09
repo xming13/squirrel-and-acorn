@@ -299,16 +299,16 @@ a {
   margin: 0;
   padding: 0;
   background: #39FF7E;
-  min-height: 400px; }
-
-.highscore-list li {
-  height: 40px;
-  border: 2px solid #57880D;
-  background: #7EFF7E;
-  color: #054510;
-  font-size: 20px;
-  line-height: 40px;
-  list-style: none; }
+  min-height: 402px; }
+  .highscore-list li {
+    height: 42px;
+    margin-bottom: -2px;
+    border: 2px solid #57880D;
+    background: #7EFF7E;
+    color: #054510;
+    font-size: 20px;
+    line-height: 42px;
+    list-style: none; }
 
 .loader {
   width: 1em;
@@ -371,6 +371,9 @@ a {
   .main-content {
     margin: 0; }
 
+  .subtitle {
+    margin: 0; }
+
   .panel-game,
   .panel-hall-of-fame {
     width: 100%; }
@@ -384,13 +387,22 @@ a {
     left: 5px;
     font-size: 15px; }
 
+  .heading, .round-number {
+    color: #047A04;
+    font-size: 25px;
+    line-height: 40px; }
+
   .icon-back:after {
     content: ''; }
 
+  .scoreboard {
+    margin-bottom: 10px; }
+
   .highscore-list {
-    min-height: 360px; }
+    min-height: 302px; }
     .highscore-list li {
-      height: 36px;
-      line-height: 36px; } }
+      height: 32px;
+      line-height: 32px;
+      font-size: 16px; } }
 
 /*# sourceMappingURL=squirrel-and-acorn.css.map */
