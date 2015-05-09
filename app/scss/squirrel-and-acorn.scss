@@ -449,7 +449,8 @@ a {
     overflow: hidden !important;
 }
 
-@media(min-width: 320px) and (max-width: 540px) {
+/* Mobile Phones Portrait or Landscape */
+@media screen and (max-device-width: 640px) {
     .main-content {
         margin: 0;
     }
