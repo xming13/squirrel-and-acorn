@@ -95,14 +95,13 @@ a {
     -moz-border-radius: 5px;
     border-radius: 5px;
     cursor: pointer;
-}
 
-.btn-play:hover,
-.btn-hall-of-fame:hover {
-    color: #fff;
-    background-color: #29E229;
-    border-color: #79FF79;
-    outline: 0px none;
+    &:hover {
+        color: #fff;
+        background-color: #29E229;
+        border-color: #79FF79;
+        outline: 0px none;
+    }
 }
 
 .panel-game,
@@ -118,12 +117,15 @@ a {
     margin-bottom: 15px;
 }
 
-.icon-home-holder,
-.icon-menu-holder {
+.icon-holder {
     position: absolute;
 }
 
-.icon-back {
+.icon-fun-fact-holder {
+    right: 0;
+}
+
+.icon-round {
     display: block;
     float: left;
     position: relative;
@@ -136,49 +138,60 @@ a {
     color: transparent;
     border: 4px solid #19d300;
     cursor: pointer;
+
+    &:before {
+        font-family: 'fontawesome';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 32px;
+        text-align: center;
+        color: #fff;
+        -webkit-font-smoothing: antialiased;
+        content: "\f053";
+    }
+
+    &:after {
+        content: attr(data-info);
+        position: absolute;
+        top: -22px;
+        left: 0;
+        width: 95px;
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+        color: #009400;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &:hover {
+        background: #fff;
+
+        &:before {
+            color: #047a04;
+        }
+
+        &:after {
+            opacity: 1;
+        }
+    }
 }
 
-.icon-back:before {
-    font-family: 'fontawesome';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 32px;
-    text-align: center;
-    color: #fff;
-    -webkit-font-smoothing: antialiased;
-    content: "\f053";
-}
+.icon-fun-fact {
+    float: right;
+    content: " ";
 
-.icon-back:after {
-    content: attr(data-info);
-    position: absolute;
-    top: -22px;
-    left: 0px;
-    width: 95px;
-    text-align: left;
-    font-size: 14px;
-    font-weight: bold;
-    color: #009400;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.icon-back:hover {
-    background: #fff;
-}
-
-.icon-back:hover:before {
-    color: #047a04;
-}
-
-.icon-back:hover:after {
-    opacity: 1;
+    &:after {
+        left: auto;
+        right: 0;
+        text-align: right;
+    }
 }
 
 .round-number,
@@ -199,159 +212,182 @@ a {
     background: #00FF29;
     color: #fff;
     border: 1px solid #000;
+
+    li {
+        display: table;
+        position: relative;
+        float: left;
+        width: 20%;
+        cursor: pointer;
+        border: 1px solid #000;
+
+        img {
+            display: block;
+            position: absolute;
+            width: 100%;
+            cursor: pointer;
+            max-width: 100%;
+        }
+
+        &:not(.disabled):hover {
+            background-color: #fff;
+            color: #00FF00;
+        }
+    }
 }
 
-.grid li {
-    display: table;
-    position: relative;
-    float: left;
-    width: 20%;
-    cursor: pointer;
-    border: 1px solid #000;
+.menu-grid li {
+    &.disabled {
+        background-color: #888;
+    }
+
+    &.locked {
+        background-color: #002e00;
+    }
+
+    span {
+        position: absolute;
+        left: 10px;
+        font-size: 30px;
+        color: #098109;
+    }
 }
 
-.menu-grid li.disabled {
-    background-color: #888;
-}
+$nodeFixedBgColor: #002e00;
+$nodeSelectedBgColor: #bdffd2;
+$nodeSelectedHoverBgColor: #f7ffa0;
+$nodeSelectedFixedBgColor: #3c833c;
 
-.menu-grid li.locked {
-    background-color: #002e00;
-}
+.board-grid li {
+    &.node-fixed {
+        background-color: $nodeFixedBgColor;
 
-.menu-grid li span {
-    position: absolute;
-    left: 10px;
-    font-size: 30px;
-    color: #098109;
-}
+        &:hover {
+            background-color: $nodeFixedBgColor;
+        }
 
-.grid li:not(.disabled):hover {
-    background-color: #fff;
-    color: #00FF00;
-}
+        &.up,
+        &.up:hover {
+            border-top: 1px solid $nodeFixedBgColor;
+        }
 
-.board-grid li.node-fixed,
-.board-grid li.node-fixed:hover {
-    background-color: #002e00;
-}
+        &.right,
+        &.right:hover {
+            border-right: 1px solid $nodeFixedBgColor;
+        }
 
-.board-grid li.node-fixed.up,
-.board-grid li.node-fixed.up:hover {
-    border-top: 1px solid #002e00;
-}
+        &.down,
+        &.down:hover {
+            border-bottom: 1px solid $nodeFixedBgColor;
+        }
 
-.board-grid li.node-fixed.right,
-.board-grid li.node-fixed.right:hover {
-    border-right: 1px solid #002e00;
-}
+        &.left,
+        &.left:hover {
+            border-left: 1px solid $nodeFixedBgColor;
+        }
+    }
 
-.board-grid li.node-fixed.left,
-.board-grid li.node-fixed.left:hover {
-    border-left: 1px solid #002e00;
-}
+    &.node-disabled {
+        background-color: #888;
 
-.board-grid li.node-fixed.down,
-.board-grid li.node-fixed.down:hover {
-    border-bottom: 1px solid #002e00;
-}
+        &:hover {
+            background-color: #888;
+        }
 
-.board-grid li.node-disabled,
-.board-grid li.node-disabled:hover {
-    background-color: #888;
-}
+        &.up,
+        &.up:hover {
+            border-top: 1px solid #888;
+        }
 
-.board-grid li.node-disabled.up,
-.board-grid li.node-disabled.up:hover {
-    border-top: 1px solid #888;
-}
+        &.right,
+        &.right:hover {
+            border-right: 1px solid #888;
+        }
 
-.board-grid li.node-disabled.right,
-.board-grid li.node-disabled.right:hover {
-    border-right: 1px solid #888;
-}
+        &.down,
+        &.down:hover {
+            border-bottom: 1px solid #888;
+        }
 
-.board-grid li.node-disabled.down,
-.board-grid li.node-disabled.down:hover {
-    border-bottom: 1px solid #888;
-}
+        &.left,
+        &.left:hover {
+            border-left: 1px solid #888;
+        }
+    }
 
-.board-grid li.node-disabled.left,
-.board-grid li.node-disabled.left:hover {
-    border-left: 1px solid #888;
-}
+    &.node-acorn.warning {
+        background-color: #FF6363;
+    }
 
-.board-grid li.node-acorn.warning {
-    background-color: #FF6363;
-}
+    &.selected {
+        background-color: $nodeSelectedBgColor;
 
-.board-grid li.selected {
-    background-color: #bdffd2;
-}
+        &.up {
+            border-top: 1px solid $nodeSelectedBgColor;
 
-.board-grid li.selected.up {
-    border-top: 1px solid #bdffd2;
-}
+            &:hover {
+                border-top: 1px solid $nodeSelectedHoverBgColor;
+            }
 
-.board-grid li.selected.right {
-    border-right: 1px solid #bdffd2;
-}
+            &.node-fixed,
+            &.node-fixed:hover {
+                border-top: 1px solid $nodeSelectedFixedBgColor;
+            }
+        }
 
-.board-grid li.selected.down {
-    border-bottom: 1px solid #bdffd2;
-}
+        &.right {
+            border-right: 1px solid $nodeSelectedBgColor;
 
-.board-grid li.selected.left {
-    border-left: 1px solid #bdffd2;
-}
+            &:hover {
+                border-right: 1px solid $nodeSelectedHoverBgColor;
+            }
 
-.board-grid li.selected:hover {
-    background-color: #f7ffa0;
-}
+            &.node-fixed,
+            &.node-fixed:hover {
+                border-right: 1px solid $nodeSelectedFixedBgColor;
+            }
+        }
 
-.board-grid li.selected.up:hover {
-    border-top: 1px solid #f7ffa0;
-}
+        &.down {
+            border-bottom: 1px solid $nodeSelectedBgColor;
 
-.board-grid li.selected.right:hover {
-    border-right: 1px solid #f7ffa0;
-}
+            &:hover {
+                border-bottom: 1px solid $nodeSelectedHoverBgColor;
+            }
 
-.board-grid li.selected.down:hover {
-    border-bottom: 1px solid #f7ffa0;
-}
+            &.node-fixed,
+            &.node-fixed:hover {
+                border-bottom: 1px solid $nodeSelectedFixedBgColor;
+            }
+        }
 
-.board-grid li.selected.left:hover {
-    border-left: 1px solid #f7ffa0;
-}
+        &.left {
+            border-left: 1px solid $nodeSelectedBgColor;
 
-.board-grid li.selected.node-fixed,
-.board-grid li.selected.node-fixed:hover {
-    background-color: #3c833c;
-}
+            &:hover {
+                border-left: 1px solid $nodeSelectedHoverBgColor;
+            }
 
-.board-grid li.selected:after {
-    opacity: 1;
-}
+            &.node-fixed,
+            &.node-fixed:hover {
+                border-left: 1px solid $nodeSelectedFixedBgColor;
+            }
+        }
 
-.board-grid li .content {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-}
+        &:hover {
+            background-color: $nodeSelectedHoverBgColor;
+        }
 
-.grid li img {
-    display: block;
-    position: absolute;
-    width: 100%;
-    cursor: pointer;
-    max-width: 100%;
-}
+        &.node-fixed {
+            background-color: $nodeSelectedFixedBgColor;
+        }
+    }
 
-.infinite {
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-    -ms-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
+    .content {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
 }
 
 .highscore-list {
@@ -443,6 +479,13 @@ a {
     87.5% {
         box-shadow: 0em -3em 0em 0em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 0em #ffffff, -2em -2em 0 0.2em #ffffff;
     }
+}
+
+.infinite {
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
 .fb-like{

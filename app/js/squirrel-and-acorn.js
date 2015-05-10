@@ -1443,7 +1443,7 @@ function() {
 
         $(".btn-play").click(function() {
             $(".panel-main").hide();
-            $(".panel-game").show();
+            $(".panel-game").fadeIn();
             self.menuGame();
         });
 
@@ -1452,9 +1452,8 @@ function() {
         });
 
         $(".icon-home").click(function() {
-            $(".panel-game").hide();
-            $(".panel-hall-of-fame").hide();
-            $(".panel-main").show();
+            $(".panel-game, .panel-hall-of-fame").hide();
+            $(".panel-main").fadeIn();
         });
 
         $(".icon-menu").click(function() {
@@ -1478,10 +1477,8 @@ function() {
         var self = this;
         gameState = GAME_STATE_ENUM.MENU;
 
-        $(".icon-home-holder").show();
-        $(".icon-menu-holder").hide();
-        $(".menu").show();
-        $(".board").hide();
+        $(".icon-home-holder, .menu").fadeIn();
+        $(".icon-menu-holder, .board").fadeOut();
         $(".round-number").html("&nbsp;");
 
         // set to 0 to force resize
@@ -1545,9 +1542,8 @@ function() {
     this.startGame = function(index) {
         gameState = GAME_STATE_ENUM.START;
 
-        $(".icon-menu-holder").show();
+        $(".icon-menu-holder, .board").fadeIn();
         $(".menu").hide();
-        $(".board").show();
 
         roundNumber = index;
         this.setupGameNode();
@@ -1766,9 +1762,7 @@ function() {
     };
     this.showHallOfFame = function() {
         $(".panel-main").hide();
-        $(".panel-hall-of-fame").show();
-        $(".icon-home").show();
-        $(".loader").show();
+        $(".panel-hall-of-fame, .icon-home, .loader").fadeIn();
 
         $(".highscore-list").html("");
 
