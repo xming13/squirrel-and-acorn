@@ -185,7 +185,10 @@ a {
 
 .icon-fun-fact {
     float: right;
-    content: " ";
+
+    &:before {
+        content: "\f005";
+    }
 
     &:after {
         left: auto;

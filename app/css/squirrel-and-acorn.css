@@ -153,8 +153,9 @@ a {
       opacity: 1; }
 
 .icon-fun-fact {
-  float: right;
-  content: " "; }
+  float: right; }
+  .icon-fun-fact:before {
+    content: "\f005"; }
   .icon-fun-fact:after {
     left: auto;
     right: 0;

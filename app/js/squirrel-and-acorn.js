@@ -1415,18 +1415,26 @@ function() {
             }
         });
 
-        $(".icon-calculator").click(function(e) {
+        $(".icon-fun-fact").click(function(e) {
+            var showFunFact = function() {
+                swal({
+                    title: "Fun Fact",
+                    text: "There are 8512 different ways for the squirrel to move from top left to bottom right!",
+                    imageUrl: "images/main-acorn.png"
+                });
+            };
+
             if (!userData.easterEgg.squirrel) {
-                var that = this;
                 e.preventDefault();
                 userData.easterEgg.squirrel = true;
                 self.saveData(userData);
                 swal({
                     title: "Congratulations!",
                     text: "You have found the Green Egg!",
-                    imageUrl: "images/green-egg.png"
+                    imageUrl: "images/green-egg.png",
+                    closeOnConfirm: false
                 }, function() {
-                    window.open(that.href, '_blank');
+                    showFunFact();
                 });
                 $.ajax({
                     method: "POST",
@@ -1438,6 +1446,9 @@ function() {
                         score: 1
                     })
                 });
+            }
+            else {
+                showFunFact();
             }
         });
 
@@ -1478,7 +1489,7 @@ function() {
         gameState = GAME_STATE_ENUM.MENU;
 
         $(".icon-home-holder, .menu").fadeIn();
-        $(".icon-menu-holder, .board").fadeOut();
+        $(".icon-menu-holder, .board").hide();
         $(".round-number").html("&nbsp;");
 
         // set to 0 to force resize
