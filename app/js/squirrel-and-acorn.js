@@ -1446,8 +1446,7 @@ function() {
                         score: 1
                     })
                 });
-            }
-            else {
+            } else {
                 showFunFact();
             }
         });
