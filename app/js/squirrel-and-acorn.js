@@ -1419,8 +1419,9 @@ function() {
             var showFunFact = function() {
                 swal({
                     title: "Fun Fact",
-                    text: "There are 8512 different ways for the squirrel to move from top left to bottom right!",
-                    imageUrl: "images/main-acorn.png"
+                    text: "There are <b>8512</b> different ways for the squirrel to move from top left to bottom right!",
+                    imageUrl: "images/main-acorn.png",
+                    html: true
                 });
             };
 
@@ -1527,19 +1528,7 @@ function() {
                     });
                 }
             } else {
-                if (i === nodeArray.length + 1 && i - 1 === userData.squirrel.level) {
-                    $li.html('<img src="images/squirrel.png" class="infinite animated bounce"/>');
-                    $li.click(function() {
-                        swal({
-                            title: "Fun Fact",
-                            text: "There are <b>8512</b> different paths for the squirrel to move from top left to bottom right!",
-                            imageUrl: "images/main-squirrel.png",
-                            html: true
-                        });
-                    });
-                } else {
-                    $li.addClass('disabled');
-                }
+                $li.addClass('disabled');
             }
 
             $(".menu-grid").append($li);
@@ -1569,9 +1558,8 @@ function() {
         roundNumber = nodeArray.length;
 
         $(".round-number").html("Last Round");
-        $(".icon-menu-holder").show();
         $(".menu").hide();
-        $(".board").show();
+        $(".icon-menu-holder, .board").fadeIn();
 
         $(".board-grid").html("");
         var gameOverNode = {

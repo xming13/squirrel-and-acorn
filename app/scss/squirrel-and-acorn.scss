@@ -524,7 +524,8 @@ $nodeSelectedFixedBgColor: #3c833c;
         line-height: 40px;
     }
 
-    .icon-back:after {
+    .icon-back:after,
+    .icon-fun-fact:after {
         content: '';
     }
 
