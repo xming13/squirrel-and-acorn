@@ -739,7 +739,7 @@ function() {
         }],
         disabledNodes: []
     }, {
-        acornNodes: [4, 12, 20],
+        acornNodes: [4, 6, 8, 12, 16, 18, 20],
         directionNodes: [{
             index: 0,
             direction: 1,
