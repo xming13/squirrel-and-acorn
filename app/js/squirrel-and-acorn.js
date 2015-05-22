@@ -1712,6 +1712,7 @@ function() {
                         imageUrl: "images/love.png",
                         type: "input",
                         text: "Write your name here! It will appear in the Hall of Fame!",
+                        inputValue: userData.username,
                         closeOnConfirm: false
                     }, function(playerName) {
                         if (playerName == "") {
@@ -1742,7 +1743,6 @@ function() {
                             });
                         }
                     });
-                    $('.sweet-alert input[type=text]:first').val(userData.username);
                 });
             }
         });
