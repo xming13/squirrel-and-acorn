@@ -1378,7 +1378,8 @@ function() {
 
             var styles = "<style>"
                 // +2px for the ul border
-                + "ul.grid { width: " + (liWidth * 5 + 2) + "px; }" + ".grid li { width: " + liWidth + "px; height: " + liWidth + "px; }" + ".grid li .content { font-size: " + (liWidth / 2) + "px; }" + ".grid li span { font-size: " + (liWidth * 0.3) + "px; left: " + (liWidth * 0.1) + "px; }" + "</style>";
+                +
+                "ul.grid { width: " + (liWidth * 5 + 2) + "px; }" + ".grid li { width: " + liWidth + "px; height: " + liWidth + "px; }" + ".grid li .content { font-size: " + (liWidth / 2) + "px; }" + ".grid li span { font-size: " + (liWidth * 0.3) + "px; left: " + (liWidth * 0.1) + "px; }" + "</style>";
             if (injectedStyleDiv) {
                 injectedStyleDiv.html(styles);
             } else {
